@@ -1,0 +1,20 @@
+{
+  "name": "pdv-dialogflow-server",
+  "version": "0.0.1",
+  "description": "Servido que conecta o dialogflow ao banco de dados do projeto Pontos de Vida",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Rodolfo Marques",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3"
+  }
+}

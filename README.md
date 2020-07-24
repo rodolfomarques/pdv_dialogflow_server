@@ -9,7 +9,11 @@ Este é o projeto do servidor, desenvolvido em Node e Express, que cria a conex�
 <h2>Como instalar</h2>
 
 - Faça o clone do repositório.
-- Dentro da pasta do repositório, use o comando npm init para baixar os módulos que são dependencias do projeto
+- Dentro da pasta do repositório, use o comando npm init para baixar os módulos que são dependencias do projeto.
+- Rodar o comandos <strong> npx sequelize-cli init</strong> para criar o arquivo config.json do banco de dados
+- Configurar o nome do banco de dados, nome do usuário e senha no arquivo <strong>./config/config.json.
+- Rodar o comandos <strong> npx sequelize db:create</strong> para criar o banco de dados.
+- Rodar o comandos <strong> npx sequelize db:migrate</strong> para criar as tabelas no banco de dados.
 
 <h2>Variáveis de Ambiente</h2>
 

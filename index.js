@@ -1,16 +1,13 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const routes = require('./routes')
 require('dotenv').config();
-require('./config/set-database');
-
+require('./config/db-connection');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-  res.send('Silence is gold')
-})
+app.use(routes)
 
 app.post("/dialogflow", (req, res) => {
 

@@ -1,22 +1,23 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db-connection');
-const Usuario = require('./Usuario');
+const {Model, DataTypes} = require('sequelize');
 
-const Equipe = db.define('equipe', {
-    id_equipe: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        unique: true
-    },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    descricao: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-});
 
+class Equipe extends Model {
+    static init(sequelize){
+        super.init({
+            nome: DataTypes.STRING,
+            descricao: DataTypes.TEXT
+        },{
+            sequelize
+        })
+    }
+
+    static associate(models){
+        this.belongsToMany(models.Usuario, {
+            through: "EquipeUsuario",
+            foreignKey: 'id_equipe',
+            as: 'equipe'
+        })
+    }
+}
+ 
 module.exports = Equipe;

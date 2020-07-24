@@ -1,19 +1,16 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db-connection');
-const Usuario = require('./Usuario');
-const Equipe = require('./Equipe');
+const {Model, DataTypes} = require('sequelize');
 
-const EquipeUsuario = db.define('equipeUsuario', {
-    id_equipe_usuario: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        unique: true
-    },
-    local: {
-        type: Sequelize.STRING,
-        allowNull: false
+
+class EquipeUsuario extends Model {
+    static init(sequelize){
+        super.init({
+            id_usuario: DataTypes.INTEGER,
+            id_equipe: DataTypes.INTEGER,
+            moderador: DataTypes.BOOLEAN
+        },{
+            sequelize
+        })
     }
-});
+}
 
 module.exports = EquipeUsuario;

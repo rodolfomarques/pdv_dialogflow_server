@@ -1,52 +1,32 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db-connection');
+const {Model} = require('sequelize');
+const {DataTypes} = require('sequelize');
 
-const Usuario = db.define('usuario', {
-    id_usuario: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-        unique: true
-    },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-    celular: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
-    plataforma: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    data_nascimento: {
-        type: Sequelize.DATEONLY,
-        allowNull: false
-    },
-    sexo: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    tipo_sanguineo: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    privacidade: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true,
-        defaultValue: true
-    },
-    nivel: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 1
+class Usuario extends Model {
+    static init(sequelize){
+        super.init({
+            nome: DataTypes.STRING,
+            email: DataTypes.STRING,
+            celular: DataTypes.BIGINT(13),
+            plataforma: DataTypes.STRING,
+            data_nascimento: DataTypes.DATEONLY,
+            sexo: DataTypes.STRING,
+            tipo_sanguineo: DataTypes.STRING,
+            privacidade: DataTypes.BOOLEAN,
+            nivel: DataTypes.INTEGER
+        },{
+            sequelize
+        })
     }
-});
+
+    static associate(models){
+        this.hasMany(models.Doacao, {foreignKey: 'id_usuario', as: 'doacoes'});
+        this.belongsToMany(models.Equipe, {
+            through: 'EquipeUsuario',
+            foreignKey: 'id_usuario',
+            as: 'participante'
+        })
+    }
+}
+
 
 module.exports = Usuario;

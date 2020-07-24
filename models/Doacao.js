@@ -1,25 +1,21 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db-connection');
-const Usuario = require('../models/Usuario');
+const {Model, DataTypes} = require('sequelize');
 
-const Doacao = db.define('doacao', {
-    id_doacao: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        unique: true
-    },
-    data: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    local: {
-        type: Sequelize.STRING,
-        allowNull: false
+
+class Doacao extends Model {
+    static init(sequelize) {
+        super.init({
+            id_usuario: DataTypes.INTEGER,
+            data: DataTypes.DATEONLY,
+            local: DataTypes.STRING
+        },{
+            sequelize,
+            tableName: 'doacoes'
+        })
     }
-}, {
-    tableName: 'doacoes'
-});
+
+    static associate(models){
+        this.belongsTo(models.Usuario, {foreignKey: 'id', as: 'doador'})
+    }
+}
 
 module.exports = Doacao;

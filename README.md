@@ -34,5 +34,5 @@ tipo de banco de dados, modifique o parâmetro <strong>"dialect"</strong> no arq
 
 <h3>Modelos</h3>
 
-Os modelos utilizados no projeto encontram-se no diretório <strong>./models</strong>. O arquivo que faz a sincronização com o banco de dados é
-o arquivo "<strong>./config/set-database.js</strong>".
+Os modelos utilizados no projeto encontram-se no diretório <strong>./models</strong>. O arquivo que faz a sincronização dos modelos com o banco de dados é
+o arquivo "<strong>./config/db-connection.js</strong>".

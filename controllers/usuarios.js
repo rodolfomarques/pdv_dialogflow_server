@@ -5,6 +5,11 @@ module.exports = {
     async create(req, res){
 
         const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo} = req.body;
+
+        const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+
+        if(usuario) { return res.json({fulfillmentText: `Esse usuário já está cadastrado`})}
+
         await Usuario.create({
             nome: nome,
             email: email,
@@ -22,5 +27,12 @@ module.exports = {
                 console.error(err)
                 res.json({fulfillmentText: `Aconteceu um erro no seu cadastro ${err}`})
             })
+    },
+
+    async userData(req, res) {
+
+        const {celular} = req.body;
+        const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+        
     }
 }

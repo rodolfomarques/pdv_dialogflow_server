@@ -8,7 +8,8 @@ class EquipeUsuario extends Model {
             id_equipe: DataTypes.INTEGER,
             moderador: DataTypes.BOOLEAN
         },{
-            sequelize
+            sequelize,
+            tableName: 'usuario_equipes'
         })
     }
 }

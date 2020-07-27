@@ -19,11 +19,11 @@ class Usuario extends Model {
     }
 
     static associate(models){
-        this.hasMany(models.Doacao, {foreignKey: 'id_usuario', as: 'doacoes'});
+        this.hasMany(models.Doacao, {foreignKey: 'id_usuario', as: 'doações'});
         this.belongsToMany(models.Equipe, {
             through: 'EquipeUsuario',
             foreignKey: 'id_usuario',
-            as: 'participante'
+            as: 'equipe'
         })
     }
 }

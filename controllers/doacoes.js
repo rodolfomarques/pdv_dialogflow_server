@@ -23,7 +23,13 @@ module.exports = {
 
     async select(req, res) {
         const {celular} = req.body;
-        const resultado = await Usuario.findAll({where:{celular:celular}})
+        const resultado = await Usuario.findAll({where:{celular:celular}, include:{
+            model: Doacao,
+            as: 'doações',
+            throught:{attributes: []}
+            },
+            attributes: ['nome', 'sexo', 'email', 'tipo_sanguineo']
+         })
         return res.json(resultado);
     }
 }

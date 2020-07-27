@@ -15,7 +15,7 @@ class Equipe extends Model {
         this.belongsToMany(models.Usuario, {
             through: "EquipeUsuario",
             foreignKey: 'id_equipe',
-            as: 'equipe'
+            as: 'participantes'
         })
     }
 }

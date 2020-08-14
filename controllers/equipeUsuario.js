@@ -8,7 +8,7 @@ module.exports = {
 
     async create(req, res){
         
-        const {celular, id_equipe} = req.body;
+        const {celular, id_equipe} = req.body.queryResult.parameters;
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
 
         await EquipeUsuario.create({
@@ -20,7 +20,7 @@ module.exports = {
 
     async select(req, res) {
 
-        const {id_equipe} = req.body;
+        const {id_equipe} = req.body.queryResult.parameters;
         const membros = await Equipe.findByPk(Number(id_equipe), {attributes: ['nome', 'descricao'], include:{
             model: Usuario,
             as: 'participantes',

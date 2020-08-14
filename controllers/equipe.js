@@ -7,7 +7,7 @@ module.exports = {
 
     async create(req, res){
 
-        const {nome, descricao, celular} = req.body;
+        const {nome, descricao, celular} = req.body.queryResult.parameters;
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(usuario => {
             console.log(`usuário ${usuario.nome} foi encontrado`);
             return usuario;

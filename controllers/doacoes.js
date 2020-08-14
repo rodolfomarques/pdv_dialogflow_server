@@ -5,9 +5,9 @@ module.exports = {
 
     async create(req, res){
 
-        const {data, local, celular} = req.body;
+        const {data, local, celular} = req.body.queryResult.parameters;
         const usuario = await Usuario.findOne({where:{celular:celular}});
-
+        
         if(!usuario){
             return res.json({fulfillmentText: `Usuário não localizado, não foi possível registrar a doação`});
         }
@@ -22,7 +22,7 @@ module.exports = {
     },
 
     async select(req, res) {
-        const {celular} = req.body;
+        const {celular} = req.body.queryResult.parameters;
         const resultado = await Usuario.findAll({where:{celular:celular}, include:{
             model: Doacao,
             as: 'doações',

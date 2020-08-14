@@ -1,15 +1,22 @@
 const express = require('express');
-const UsuarioControle = require('./controllers/usuarios');
-const DoacaoControle = require('./controllers/doacoes');
-const EquipeControle = require('./controllers/equipe');
-const EquipeUsuarioControle = require('./controllers/equipeUsuario');
-const route = express.Router()
+const DialogflowControle = require('./controllers/dialogflow');
+const route = express.Router();
 
 
 route.get('/', (req, res) => {
     res.send('Silence is gold')
 })
 
-route.post('/test', EquipeUsuarioControle.select)
+
+route.post('/dialogflow', (req, res, next) => {
+
+    console.log(req.body);
+
+    next();
+    
+})
+
+route.post('/dialogflow', DialogflowControle.checkIntent)
+
 
 module.exports = route;

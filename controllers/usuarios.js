@@ -2,9 +2,25 @@ const Usuario = require('../models/Usuario');
 
 module.exports = {
 
+    async checkNewUser(req, res){
+
+        const {celular} = req.body.queryResult.parameters;
+        const novoUsuario = await Usuario.findAll({where:{celular: celular}}).then((response) => {
+       
+            if(response == [] || response == false) {
+                return true;
+            } else {
+                return false;
+            }
+        }).catch((err) => {console.error(err)})
+
+        return novoUsuario;
+
+    },
+
     async create(req, res){
 
-        const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo} = req.body;
+        const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo} = req.body.queryResult.parameters;
 
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
 
@@ -31,8 +47,9 @@ module.exports = {
 
     async userData(req, res) {
 
-        const {celular} = req.body;
+        const {celular} = req.body.queryResult.parameters;
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+        return usuario;
         
     }
 }

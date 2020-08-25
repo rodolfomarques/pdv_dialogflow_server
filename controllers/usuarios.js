@@ -51,5 +51,11 @@ module.exports = {
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
         return usuario;
         
+    },
+
+    async userDataByEmail(email){
+
+        const usuario = await Usuario.findOne({where:{email:email}}).then(userData => {return userData}).catch(err => {return console.error(err)});
+        return usuario;
     }
 }

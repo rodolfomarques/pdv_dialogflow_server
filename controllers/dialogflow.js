@@ -19,19 +19,25 @@ module.exports = {
                 dialogflowFunctions.cadastro_usuario.createUser(req, res);
                 break;
             case 'cadastro_equipe':
-                return res.json({fulfillmentText: `esse equipe foi cadastrada`});
+                dialogflowFunctions.equipe.create(req, res);
                 break;
             case 'cadastro_participante':
-                return res.json({fulfillmentText:`Esse usuário foi inserido no seu grupo de doadores`});
+                dialogflowFunctions.equipe.associate(req, res);
                 break;
             case 'historico_doacao':
-                return res.json({fulfillmentText:`Essa foram as suas doações registradas aqui na plataforma`});
+                dialogflowFunctions.doacao.historic(req, res);
                 break;
             case 'membros_equipe':
-                return res.json({fulfillmentText: `Estas são as pessoa que fazem parte das sua equipe`})
+                dialogflowFunctions.equipe.myTeams(req, res)
                 break;
             case 'registrar_doacao':
                 dialogflowFunctions.doacao.create(req, res);
+                break;
+            case 'ultima_doacao':
+                dialogflowFunctions.doacao.lastData(req, res);
+                break;
+            case 'tempo_restante':
+                dialogflowFunctions.doacao.remainingTime(req, res);
                 break;
         }
     }

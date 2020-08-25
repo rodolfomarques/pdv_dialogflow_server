@@ -6,12 +6,12 @@ const basicAuth = require('express-basic-auth');
 require('dotenv').config();
 require('./config/db-connection');
 
-app.use('/dialogflow', basicAuth({
-  users: {'admin': `${process.env.SERVER_PASS}` },
-}))
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes)
+app.use('/dialogflow', basicAuth({
+  users: {'admin': `${process.env.SERVER_PASS}` },
+}))
 
   
 // listen for requests :)

@@ -18,6 +18,7 @@ module.exports = {
             local: local,
             id_usuario: usuario.id
         }).then((doacao)=> {
+
             return res.json({fulfillmentText: `Sua doação feita no ${doacao.local}, foi registrada no dia ${doacao.data}`});
         }).catch(err => { return res.json({fulfillmentText: `Aconteceu um erro com sua doação: ${err}`})});
     },
@@ -36,6 +37,7 @@ module.exports = {
             var listaResultado = ['```Lista das suas doações registradas``` \n'];
             
             listaDoacoes.forEach(element => {
+                
                 
                 item  = `*\n\nDoação número ${element.dataValues.id}* \n*Local da doação:* ${element.dataValues.local} \n*Dia da doação:* ${element.dataValues.data}`;
                 listaResultado.push(item);
@@ -90,37 +92,42 @@ module.exports = {
         }).then(resultado => {
             
             const listaDoacoes = resultado[0].dataValues.doacoes;
-            const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
-            const ultimaDoacao = listaDoacoes[numUltimaDoacao];
-            const valorUltimaData = ultimaDoacao.dataValues.data;
 
-            if(valorUltimaData === null || valorUltimaData == [] || valorUltimaData == 0) {
-            
-                return valorUltimaData = new Date.now();
-    
+            if (listaDoacoes.length == 0) {
+
+                return semUltimaData = '2000-01-01';
+
             } else {
-                
+
+                const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
+                const ultimaDoacao = listaDoacoes[numUltimaDoacao];
+                const valorUltimaData = ultimaDoacao.dataValues.data;
                 return valorUltimaData;
+
             }
 
         }).catch(err =>{ console.error(err)});
         
         // - Calculo da diferença entre o dia da última doação e o dia de hoje  
 
-        const hoje = new Date();
+        const hoje = Date.now();
         const dataAnterior = new Date(ultimaData);
-        const dif = Math.abs(hoje.getTime() - dataAnterior.getTime());
+        const dataHoje = new Date(hoje);
+        const dif = Math.abs(dataHoje.getTime() - dataAnterior.getTime());
         const diasDeDiferenca = Math.ceil(dif / (1000 * 60 * 60 * 24) - 1);
-
+        console.log(dif)
+        console.log(diasDeDiferenca);
         // - Associação do sexo com o tempo mínimo de doacão
 
         const usuario = await Usuario.findOne({where:{celular:celular}});
 
-        if (usuario.sexo == 'masculino' && diasDeDiferenca >= 60) {
+        var sexo = usuario.sexo.toString().toLowerCase()
+
+        if (sexo == 'masculino' && diasDeDiferenca >= 60) {
 
             return true;
 
-        } else if(usuario.sexo == 'feminino' && diasDeDiferenca >= 90) {
+        } else if(sexo == 'feminino' && diasDeDiferenca >= 90) {
 
             return true;
        
@@ -146,33 +153,48 @@ module.exports = {
             },
             attributes: []
         }).then(resultado => {
-            
+
             const listaDoacoes = resultado[0].dataValues.doacoes;
-            const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
-            const ultimaDoacao = listaDoacoes[numUltimaDoacao];
-            return valorUltimaData = ultimaDoacao.dataValues.data;
+
+            if (listaDoacoes.length == 0) {
+
+                return semUltimaData = '2000-01-01';
+
+            } else {
+
+                const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
+                const ultimaDoacao = listaDoacoes[numUltimaDoacao];
+                const valorUltimaData = ultimaDoacao.dataValues.data;
+                return valorUltimaData;
+
+            }
 
         }).catch(err =>{ console.error(err)});
 
         // - Calculo da diferença entre o dia da última doação e o dia de hoje  
 
-        const hoje = new Date();
+        const hoje = Date.now();
         const dataAnterior = new Date(ultimaData);
-        const dif = Math.abs(hoje.getTime() - dataAnterior.getTime());
+        const dataHoje = new Date(hoje);
+        const dif = Math.abs(dataHoje.getTime() - dataAnterior.getTime());
         const diasDeDiferenca = Math.ceil(dif / (1000 * 60 * 60 * 24) - 1);
+        console.log(dif);
+        console.log(diasDeDiferenca);
 
         // - Associação do sexo com o tempo mínimo de doacão
 
         const usuario = await Usuario.findOne({where:{celular:celular}});
 
-        if (usuario.sexo == 'masculino') {
+        var sexo = usuario.sexo.toString().toLowerCase()
+
+        if (sexo == 'masculino') {
 
             var time = 60 - diasDeDiferenca;
             return time;
 
-        } else if(usuario.sexo == 'feminino') {
+        } else if(sexo == 'feminino') {
 
-            var time = 90 - diasDeDiferenca
+            var time = 90 - diasDeDiferenca;
             return time;
        
         } 

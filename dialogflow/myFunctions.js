@@ -36,7 +36,7 @@ module.exports = {
             const newUser = await UsuarioControle.checkNewUser(req, res).then((respond) => {
                 
                 if(respond) {
-                    return res.json({fulfillmentText:`Olá! Eu sou o chatbot do Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações?`});
+                    return res.json({fulfillmentText:`\`\`\`Olá! Eu sou o chatbot do Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações sobre doação de sangue?\`\`\`\n*Digite: ajuda, para saber o que eu consigo fazer.*`});
                 } else {
                     return false
                 }
@@ -46,7 +46,7 @@ module.exports = {
     
                 let userData = await UsuarioControle.userData(req, res).then((response) => {
                     
-                    return res.json({fulfillmentText:`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?`});
+                    return res.json({fulfillmentText:`\`\`\`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?\`\`\`\n*Digite: ajuda, caso queira as opções.*`});
                 
                 })            
             }
@@ -75,21 +75,23 @@ module.exports = {
                 
             // - Verificação se o usuário atingiu o mínimo de tempo de doação
 
-            const podeDoar = DoacaoControle.canDonate(req, res).then(resposta => { 
-                console.log (resposta)
-                return resposta }).catch(err => console.error(err));
-
-            // - Registro da doação
-            
-            if(podeDoar == true) {
+            const podeDoar = await DoacaoControle.canDonate(req, res).then(resposta => { 
                 
-                const novaDoacao = await DoacaoControle.create(req, res);
-                return novaDoacao;
+                // - Registro da doação
+                 console.log(resposta);
+                if(resposta) {
+                
+                    return DoacaoControle.create(req, res).then(response => {return response});
+    
+                } else {
+    
+                    return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \n*Verifique quanto tempo falta digitando: próxima doação*`});
+                }
+            
+            }).catch(err => console.error(err));
 
-            } else {
-
-                return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \n*Verifique quanto tempo falta digitando: próxima doação*`});
-            }
+            return podeDoar;
+           
         },
 
         async historic(req, res) {
@@ -110,16 +112,21 @@ module.exports = {
 
         async remainingTime(req, res) {
 
-            const tempoRestante = await DoacaoControle.timeForNextDonation(req, res).then(response => {return response}).catch(err => console.error(err));
+            const tempoRestante = await DoacaoControle.timeForNextDonation(req, res).then(response => {
+                
+                if (response <= 0) {
 
-            if (tempoRestante >= 0) {
+                    return res.json({fulfillmentText: `Você já pode voltar a doar! Fale com seus amigos e saiba se eles podem também. \nQuem sabe se você não pega uma carona com eles :-D`})
+                    
+                } else {
+                    
+                    return res.json({fulfillmentText: `faltam ${response} dias para você pode doar novamente.`});
+                }
+                
+               }).catch(err => console.error(err));
+            
+            return tempoRestante;
 
-                return res.json({fulfillmentText: `faltam ${tempoRestante} dias para você pode doar novamente.`});
-
-            } else {
-
-                return res.json({fulfillmentText: `Você já pode voltar a doar! Fale com seus amigos e saiba se eles podem também. \nQuem sabe se você não pega uma carona com eles :-D`})
-            }
         }
     },
 

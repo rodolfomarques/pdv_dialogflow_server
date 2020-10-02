@@ -1,5 +1,6 @@
 const Doacao = require('../models/Doacao');
 const Usuario = require('../models/Usuario');
+const Responses = require('./errors_responses');
 
 module.exports = {
 
@@ -34,12 +35,12 @@ module.exports = {
         }).then((resultado) => {
                         
             const listaDoacoes = resultado[0].dataValues.doacoes
-            var listaResultado = ['```Lista das suas doações registradas``` \n'];
+            var listaResultado = ['Lista das suas doações registradas \n'];
             
             listaDoacoes.forEach(element => {
                 
                 
-                item  = `*\n\nDoação número ${element.dataValues.id}* \n*Local da doação:* ${element.dataValues.local} \n*Dia da doação:* ${element.dataValues.data}`;
+                item  = `\n\nDoação número ${element.dataValues.id} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${element.dataValues.data}`;
                 listaResultado.push(item);
 
             });
@@ -141,9 +142,12 @@ module.exports = {
 
     async timeForNextDonation(req, res) {
 
-
         const {celular} = req.body.queryResult.parameters;
+        
+        if (celular == '') {
 
+            throw Responses.plataform.no_number;
+        }
          // - Verificação da data da última doação, se ela existir, e seu retorno
             
         const ultimaData = await Usuario.findAll({where: {celular:celular}, include: {
@@ -154,7 +158,14 @@ module.exports = {
             attributes: []
         }).then(resultado => {
 
+            if(resultado[0] === undefined || resultado[0] === null) {
+
+                throw 'user_not_found';
+                
+            }
+
             const listaDoacoes = resultado[0].dataValues.doacoes;
+
 
             if (listaDoacoes.length == 0) {
 
@@ -169,9 +180,16 @@ module.exports = {
 
             }
 
-        }).catch(err =>{ console.error(err)});
+        }).catch(err =>{ 
+            
+            console.error(err)
+            return err
+
+        });
 
         // - Calculo da diferença entre o dia da última doação e o dia de hoje  
+
+        if (ultimaData == 'user_not_found'){ throw Responses.user.user_not_found }
 
         const hoje = Date.now();
         const dataAnterior = new Date(ultimaData);

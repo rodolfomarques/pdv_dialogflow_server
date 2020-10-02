@@ -16,6 +16,16 @@ module.exports = {
 
     },
 
+    async autoRemove(id_usuario, id_equipe){
+
+        await EquipeUsuario.destroy({
+            where:{
+                id_usuario: id_usuario,
+                id_equipe: id_equipe
+            }
+        }).then(() => {return true}).catch(err => {console.error(err); return false})
+    },
+
     async isModerator(celular, nome_equipe){
 
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => {

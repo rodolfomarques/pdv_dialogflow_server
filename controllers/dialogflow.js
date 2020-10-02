@@ -18,12 +18,21 @@ module.exports = {
             case 'cadastro_usuario':
                 dialogflowFunctions.cadastro_usuario.createUser(req, res);
                 break;
+            case 'Cadastro_usuario_novos_dados':
+                dialogflowFunctions.cadastro_usuario.updateUser(req,res);
+                break
             case 'cadastro_equipe':
                 dialogflowFunctions.equipe.create(req, res);
                 break;
             case 'cadastro_participante':
                 dialogflowFunctions.equipe.associate(req, res);
                 break;
+            case 'equipe_auto_remocao':
+                dialogflowFunctions.equipe.autoRemove(req, res);
+                break
+            case 'equipe_deletar':
+                dialogflowFunctions.equipe.deleteTeam(req, res)
+                break
             case 'historico_doacao':
                 dialogflowFunctions.doacao.historic(req, res);
                 break;
@@ -39,6 +48,9 @@ module.exports = {
             case 'tempo_restante':
                 dialogflowFunctions.doacao.remainingTime(req, res);
                 break;
+            case 'equipe_novos_dados':
+                dialogflowFunctions.equipe.teamUpdate(req, res);
+                break
         }
     }
 }

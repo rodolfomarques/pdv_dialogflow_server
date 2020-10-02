@@ -3,6 +3,7 @@ const EquipeUsuario = require('../models/EqupeUsuario');
 const Usuario = require('../models/Usuario');
 
 
+
 module.exports = {
 
     async create(req, res){
@@ -30,10 +31,32 @@ module.exports = {
             return res.json({fulfillmentText: `O grupo ${equipe.nome} foi criado, pelo moderador ${usuario.nome}`})
         }).catch(err => {
             console.log(err);
-            return res.json("não foi possível criar o grupo");
+            return res.json({fulfillmentText: "não foi possível criar o grupo"});
         })
 
         return novaRelacao;
+    },
+
+    async deleteTeamByName(nome_equipe){
+
+        await Equipe.destroy({
+            where: {
+                nome: nome_equipe
+            }
+        })
+    },
+
+    async teamUpdate(id_equipe, novo_nome, nova_descricao){
+
+        Equipe.update({
+            nome: novo_nome,
+            descricao: nova_descricao
+        },{
+            where:{
+                id: id_equipe
+            }
+        }).then(response => {return response}).catch(err => {throw err})
+
     },
 
     async teamDataByName(nome_equipe){

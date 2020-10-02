@@ -1,3 +1,4 @@
+const { response } = require('express');
 const Usuario = require('../models/Usuario');
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
 
     async create(req, res){
 
-        const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo} = req.body.queryResult.parameters;
+        const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo, estado} = req.body.queryResult.parameters;
 
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
 
@@ -33,16 +34,48 @@ module.exports = {
             plataforma: plataforma,
             data_nascimento: data_nascimento,
             sexo: sexo,
-            tipo_sanguineo: tipo_sanguineo
+            tipo_sanguineo: tipo_sanguineo,
+            estado: estado
         }).then(
             (novoUsuario) => {
-                return res.json({fulfillmentText: `O usuário ${novoUsuario.nome}, do sexo ${novoUsuario.sexo}, nascido em ${novoUsuario.data_nascimento}, e com o email ${novoUsuario.email} foi criado. O seu número de celular registrado é ${novoUsuario.celular}, via ${novoUsuario.plataforma}`})
+                return res.json({fulfillmentText: `O usuário ${novoUsuario.nome}, no estado ${novoUsuario.estado}, do sexo ${novoUsuario.sexo}, nascido em ${novoUsuario.data_nascimento}, e com o email ${novoUsuario.email} foi criado. O seu número registrado é ${novoUsuario.celular}, via ${novoUsuario.plataforma}`})
             }
         ).catch(
             err => {
                 console.error(err)
                 res.json({fulfillmentText: `Aconteceu um erro no seu cadastro ${err}`})
             })
+    },
+
+    async userUpdate(req, res) {
+
+        const {nome, email, celular, plataforma, data_nascimento, sexo, tipo_sanguineo, estado} = req.body.queryResult.parameters;
+
+        const update = await Usuario.update({
+            nome: nome,
+            email: email,
+            plataforma: plataforma,
+            data_nascimento: data_nascimento,
+            sexo: sexo,
+            tipo_sanguineo: tipo_sanguineo,
+            estado: estado
+        },{
+            where: {
+                celular: Number(celular)
+            }
+        }).then(() => {return true}).catch(err => {console.error(err); return false});
+
+        if(update) {
+
+            const {celular} = req.body.queryResult.parameters;
+            const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+            return usuario;
+
+        } else {
+
+            throw 'Não foi possível atualizar'
+        }
+        
     },
 
     async userData(req, res) {

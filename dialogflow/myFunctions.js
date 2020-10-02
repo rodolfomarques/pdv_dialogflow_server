@@ -7,6 +7,7 @@ const UsuarioControle = require('../controllers/usuarios');
 const DoacaoControle = require('../controllers/doacoes');
 const EquipeControle = require('../controllers/equipe');
 const EquipeUsuarioControler = require('../controllers/equipeUsuario');
+const Response = require('../controllers/errors_responses');
 
 module.exports = {
 
@@ -16,14 +17,14 @@ module.exports = {
 
         show (req, res) {
 
-            return res.json({fulfillmentText: '```Estas são as coisas que eu posso fazer:``` \n\n'+
-            `*Fazer cadastro*: cadastro um usuário novo.\n`+
-            `*Registrar doação*: registra uma nova doação sua.\n`+
-            `*Histórico de doação*: Lista as suas doações registradas.\n`+
-            `*Criar uma equipe*: cria um grupo de doadores.\n`+
-            `*Inserir um participante*: coloca um amigo no seu grupo.\n`+
-            `*Quem faz parte da minha equipe?*: Mostra quem esta no seu grupo de doadores.\n`+
-            `*tempo restante*: Mostra quanto tempo falta para a próxima doação.`            
+            return res.json({fulfillmentText: 'Estas são as coisas que eu posso fazer: \n\n'+
+            `Fazer cadastro: cadastro um usuário novo.\n`+
+            `Registrar doação: registra uma nova doação sua.\n`+
+            `Histórico de doação: Lista as suas doações registradas.\n`+
+            `Criar uma equipe: cria um grupo de doadores.\n`+
+            `Inserir um participante: coloca um amigo no seu grupo.\n`+
+            `Quem faz parte da minha equipe?: Mostra quem esta no seu grupo de doadores.\n`+
+            `tempo restante: Mostra quanto tempo falta para a próxima doação.`            
             });
         }
     },
@@ -36,7 +37,7 @@ module.exports = {
             const newUser = await UsuarioControle.checkNewUser(req, res).then((respond) => {
                 
                 if(respond) {
-                    return res.json({fulfillmentText:`\`\`\`Olá! Eu sou o chatbot do Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações sobre doação de sangue?\`\`\`\n*Digite: ajuda, para saber o que eu consigo fazer.*`});
+                    return res.json({fulfillmentText:`Olá! Eu sou o chatbot do Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações sobre doação de sangue?\nDigite: ajuda, para saber o que eu consigo fazer.`});
                 } else {
                     return false
                 }
@@ -46,7 +47,7 @@ module.exports = {
     
                 let userData = await UsuarioControle.userData(req, res).then((response) => {
                     
-                    return res.json({fulfillmentText:`\`\`\`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?\`\`\`\n*Digite: ajuda, caso queira as opções.*`});
+                    return res.json({fulfillmentText:`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?\nDigite: ajuda, caso queira as opções.`});
                 
                 })            
             }
@@ -54,7 +55,7 @@ module.exports = {
         }
     },
 
-    // Métodos ligados a intenção cadastro_usuario
+    // Métodos ligados ao registro e atualização dos dados do usuário
 
     cadastro_usuario: {
 
@@ -63,9 +64,19 @@ module.exports = {
             const novoUsuario = await UsuarioControle.create(req, res);
             return novoUsuario;
     
+        },
+
+        async updateUser(req, res){
+
+            await UsuarioControle.userUpdate(req, res).then(
+                response => {
+                    res.json({fulfillmentText: `Seu cadastro foi alterado para: ${response.nome}, nascido em ${response.data_nascimento}, sexo ${response.sexo}, tipo sanguineo ${response.tipo_sanguineo} e email: ${response.email}`})
+            }).catch(err => {res.json({fulfillmentText: err})})
         }
 
     },
+
+    // Alterar meu cadastro para: Rodolfo Marques, nascido em 16/12/1987, sexo masculino e sangue do tipo AB+. Meu email é contato@rodolfomarques.dev
 
     // Métodos ligados as intenções de doação
 
@@ -85,7 +96,7 @@ module.exports = {
     
                 } else {
     
-                    return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \n*Verifique quanto tempo falta digitando: próxima doação*`});
+                    return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \nVerifique quanto tempo falta digitando: próxima doação`});
                 }
             
             }).catch(err => console.error(err));
@@ -123,7 +134,12 @@ module.exports = {
                     return res.json({fulfillmentText: `faltam ${response} dias para você pode doar novamente.`});
                 }
                 
-               }).catch(err => console.error(err));
+               }).catch(err => {
+                   
+                console.error(`erro interno: ${err}`)
+                return res.json({fulfillmentText: err})
+
+               });
             
             return tempoRestante;
 
@@ -136,6 +152,26 @@ module.exports = {
 
             const novaEquipe = await EquipeControle.create(req, res);
             return novaEquipe
+        },
+
+        async deleteTeam(req, res) {
+
+            const {nome_equipe, celular} = req.body.queryResult.parameters;
+
+            const isModerator = await EquipeUsuarioControler.isModerator(celular, nome_equipe).then(response => {return response}).catch(err => {console.error(err); return false});
+
+            if(isModerator){
+
+                await EquipeControle.deleteTeamByName(nome_equipe).then(() => res.json({fulfillmentText: `Grupo deletado`})).catch(err => {
+                    console.error(err);
+                    res.json({fulfillmentText: `Aconteceu um erro`})
+                });
+
+            } else {
+
+                res.json({fulfillmentText: `Você não é o moderador desse grupo, você não pode deletá-lo`})
+            }
+
         },
 
         async associate(req, res){
@@ -198,14 +234,46 @@ module.exports = {
 
         },
 
+        async autoRemove(req, res){
+
+            const {nome_equipe, celular} = req.body.queryResult.parameters;
+            const usuario = await UsuarioControle.userData(req, res).then(response => {return response}).catch(err => {console.error(err)});
+
+            if(usuario === null || usuario == [] || usuario === undefined){res.json({fulfillmentText: Response.user.user_not_found})}
+
+            const grupo = await EquipeControle.teamDataByName(nome_equipe).then(response => {return response}).catch(err => {console.error(err)});
+
+            if(grupo === null || grupo == [] || grupo === undefined){res.json({fulfillmentText: Response.team.team_not_found})}
+
+            const isMember = await EquipeUsuarioControler.isMember(usuario.id, grupo.id).then(response => {return response}).catch(err => {console.error(err)});
+            const isModerator = await EquipeUsuarioControler.isModerator(celular, nome_equipe).then(response => {return response}).catch(err => {console.error(err); return false});
+
+            if(isMember && !isModerator) {
+
+                await EquipeUsuarioControler.autoRemove(usuario.id, grupo.id).then(res.json({fulfillmentText: `Você foi removido do grupo`}))
+                .catch(err => {
+                    console.error(err);
+                    res.json({fulfillmentText: `${err}`});
+                })
+
+            } else {
+
+                res.json({fulfillmentText: `Não foi possível remover o usuário do grupo. Se você o moderador deste grupo, você so poderar sair dela ao deletar o grupo.`});
+
+            }
+        },
+
         async myTeams(req, res){
 
             // - Pegar o id do usuário através do numero de celular
 
             const usuario = await UsuarioControle.userData(req, res).then(userdata => {return userdata}).catch(err => {
                 console.error(err);
-                res.json({fulfillmentText: `Houve um erro na recuperação do id do usuário na função myTeams `});
             });
+
+            if(usuario === null) {
+                return res.json({fulfillmentText: Response.user.user_not_found});
+            }
             
             // - Verificar na tabela junção em quais registros tem aquele id de usuário e armazerar os id de cada grupo associado
 
@@ -214,6 +282,11 @@ module.exports = {
                console.error(err);
                res.json({fulfillmentText: `Houve um erro na recuperação as associações na funcão myTeams`});
             });
+
+            if (associacoes === null || associacoes == []){
+                return res.json({fulfillmentText: Response.team.team_not_found})
+            }
+
             associacoes.forEach(associacao => {
                 idLista.push(associacao.dataValues.id_equipe);
             });
@@ -227,10 +300,10 @@ module.exports = {
 
                 const grupo = await EquipeControle.selectTeamById(idLista[i]).then(response => {return response}).catch(err => {console.error(err)});
                 var dadosGrupo = [
-                    `\n\n*Nome: ${grupo.dataValues.nome}*`,
-                    `\n*Descrição do Grupo:* ${grupo.dataValues.descricao}`,
+                    `\nNome: ${grupo.dataValues.nome}`,
+                    `\nDescrição do Grupo: ${grupo.dataValues.descricao}`,
                 ]
-                var integrantes = [`\n*Integrantes:*`]
+                var integrantes = [`Integrantes:`]
                 dadosGrupo.push(integrantes);
                 for(pessoa = 0; pessoa < grupo.dataValues.participantes.length; pessoa++){
                     
@@ -245,9 +318,43 @@ module.exports = {
             // - retorna essa lista de grupos para o usuário
 
             return res.json({fulfillmentText: 
-                '\`\`\`Estes são seus grupo e integrantes\`\`\`'+
+                'Estes são seus grupo e integrantes'+ 
                 `${gruposDados}`
             })
+        },
+
+        async teamUpdate(req, res) {
+
+            const {celular, nome_equipe, nome_equipe_novo, descricao_equipe} = req.body.queryResult.parameters;
+
+            const teamData = await EquipeControle.teamDataByName(nome_equipe).then(response => {
+                return response}).catch(err => {console.error(err); return false});
+            
+            if(teamData){
+                const isModerator = await EquipeUsuarioControler.isModerator(celular, nome_equipe).then(response => {return response}).catch(err => {
+                    console.error(err);
+                    return false;
+                });
+
+                if(isModerator){
+
+                    var id = teamData.dataValues.id;
+
+                    EquipeControle.teamUpdate(id, nome_equipe_novo, descricao_equipe).then(() => {
+                        return res.json({fulfillmentText: `Os dados do grupo foram atualizados`})
+                    }).catch(err => {res.json({fulfillmentText: `${err}`})})
+
+                } else {
+
+                    res.json({fulfillmentText: Response.team.is_not_moderator})
+                }
+
+            } else {
+
+                res.json({fulfillmentText: Response.team.team_not_found});
+
+            }
+ 
         }
     }
 

@@ -7,7 +7,8 @@ class Equipe extends Model {
             nome: DataTypes.STRING,
             descricao: DataTypes.TEXT
         },{
-            sequelize
+            sequelize,
+            tableName: 'equipes'
         })
     }
 

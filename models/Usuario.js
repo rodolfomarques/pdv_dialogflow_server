@@ -12,9 +12,11 @@ class Usuario extends Model {
             sexo: DataTypes.STRING,
             tipo_sanguineo: DataTypes.STRING,
             privacidade: DataTypes.BOOLEAN,
-            nivel: DataTypes.INTEGER
+            nivel: DataTypes.INTEGER,
+            estado: DataTypes.STRING
         },{
-            sequelize
+            sequelize,
+            tableName: 'usuarios'
         })
     }
 

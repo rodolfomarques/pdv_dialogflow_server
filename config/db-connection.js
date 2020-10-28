@@ -7,7 +7,7 @@ require('dotenv').config();
 
 // Inicializando as conexão com o servidor
 
-const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASS, {
+const sequelize = new Sequelize(process.env.DB, process.env.DBUSER, process.env.PASS, {
     host: 'localhost',
     dialect: 'mysql',
     pool: {

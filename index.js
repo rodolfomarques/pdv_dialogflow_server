@@ -8,7 +8,7 @@ require('./config/db-connection');
 
 //Variáveis para o envio de mensagens do servidor para o bot
 
-// require('./controllers/cron');
+require('./controllers/cron');
 
 // Middlewares do Express
 

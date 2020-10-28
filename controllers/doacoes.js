@@ -1,5 +1,6 @@
 const Doacao = require('../models/Doacao');
 const Usuario = require('../models/Usuario');
+const Medalhas = require('./medalhas')
 const Responses = require('./errors_responses');
 
 module.exports = {
@@ -36,17 +37,25 @@ module.exports = {
                         
             const listaDoacoes = resultado[0].dataValues.doacoes
             var listaResultado = ['Lista das suas doações registradas \n'];
-            
+            var numero = 1;
+
             listaDoacoes.forEach(element => {
                 
-                
-                item  = `\n\nDoação número ${element.dataValues.id} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${element.dataValues.data}`;
+                var dataDoacao = new Date(element.dataValues.data);
+                var diaDoacao = dataDoacao.getUTCDate();
+                var mesDoacao = dataDoacao.getMonth() + 1;
+                var anoDoacao = dataDoacao.getFullYear()
+
+                var medalha = Medalhas.getMedal(diaDoacao, mesDoacao)
+
+                item  = `\n\nDoação número ${numero} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${diaDoacao}/${mesDoacao}/${anoDoacao} \nMedalha:` + medalha;
                 listaResultado.push(item);
+                numero++
 
             });
 
             lista = listaResultado.toString()
-            return res.json({fulfillmentText: `${lista}`} );
+            return res.json({fulfillmentText: lista} );
          }).catch((err) => {
             console.error(err); 
             return res.json({fulfillmentText: `Aconteceu um erro: ${err}`})
@@ -173,7 +182,7 @@ module.exports = {
 
             } else {
 
-                const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
+                const numUltimaDoacao = listaDoacoes.length - 1;
                 const ultimaDoacao = listaDoacoes[numUltimaDoacao];
                 const valorUltimaData = ultimaDoacao.dataValues.data;
                 return valorUltimaData;

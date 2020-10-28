@@ -1,5 +1,3 @@
-const welcome = require('../dialogflow/welcome'); 
-const cadastroUsuario = require('../dialogflow/cadastroUsuario');
 const dialogflowFunctions = require('../dialogflow/myFunctions');
 
 module.exports = {
@@ -10,7 +8,7 @@ module.exports = {
         console.log(req.body)
         switch (intentName) {
             case 'ajuda':
-                return dialogflowFunctions.ajuda.show(req, res);
+                dialogflowFunctions.ajuda.show(req, res);
                 break;
             case 'welcome':
                 dialogflowFunctions.welcome.select(req, res);

@@ -47,7 +47,22 @@ module.exports = {
     
                 let userData = await UsuarioControle.userData(req, res).then((response) => {
                     
-                    return res.json({fulfillmentText:`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?\nDigite: ajuda, caso queira as opções.`});
+                    return res.json(
+                        {
+                            fulfillmentText:`Ola, ${response.nome}! Seja bem Vindo de Volta! O que você gostaria de fazer?\nDigite: ajuda, caso queira as opções.`,
+                            fulfillmentMessages:[
+                                {
+                                    card: {
+                                        title: `Seja bem vindo de volta ${response.nome}!`,
+                                        subtitle: "É sempre bom ver você novamente! Como eu posso te ajudar?",
+                                        imageUri: "https://trello-attachments.s3.amazonaws.com/5c729b2ea75a2e7c59446799/5d8a52b2b50fe1541bc42542/938ceeb3bb4db63a5214967f69d72e58/_Inspira%C3%A7%C3%A3o_05.png"
+                                    }
+                                }
+                            ],
+                            payload: {
+                                telegram: `seja bem vindo de volta`
+                            }
+                    });
                 
                 })            
             }

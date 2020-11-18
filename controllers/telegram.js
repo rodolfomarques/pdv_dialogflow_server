@@ -3,7 +3,7 @@ const Doacao = require('../models/Doacao');
 const Usuario = require('../models/Usuario');
 
 const messenger = new TelegramClient({
-    accessToken: 'INSERIR CHAVE'
+    accessToken: '1430926803:AAFO3mg-eDgKllf2R3enbKCJ_qICwqTdJFw'
 })
 
 // Lidando com os erros retornados

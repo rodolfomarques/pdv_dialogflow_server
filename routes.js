@@ -9,7 +9,7 @@ route.get('/', (req, res) => {
 
 route.post('/dialogflow', (req, res, next) => {
 
-    console.log(req.body.originalDetectIntentRequest.payload.data.callback_query);
+    console.log(req.body);
     
     const telegramButton = req.body.originalDetectIntentRequest.payload.data.callback_query;
     
@@ -35,11 +35,11 @@ route.post('/dialogflow', (req, res, next) => {
         // armazenando o whatsapp como plataforma e o numero do celular como celular
 
         req.body.queryResult.parameters.plataforma = sourceWhatsapp;
-        req.body.queryResult.parameters.celular = idPlataforma;
+        //req.body.queryResult.parameters.celular = idPlataforma;
 
     } else {
 
-        // armazenando o whatsapp como plataforma e o id como celular
+        // armazenando o telegram como plataforma e o id como celular
         req.body.queryResult.parameters.plataforma = sourceTelegram;
         req.body.queryResult.parameters.celular = idPlataforma; 
     }

@@ -49,6 +49,8 @@ module.exports = {
             case 'equipe_novos_dados':
                 dialogflowFunctions.equipe.teamUpdate(req, res);
                 break
+            case 'meu_perfil':
+                dialogflowFunctions.usuario.meuPerfil(req, res);
         }
     }
 }

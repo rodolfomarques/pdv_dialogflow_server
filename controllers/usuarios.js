@@ -1,4 +1,3 @@
-const { response } = require('express');
 const Usuario = require('../models/Usuario');
 
 module.exports = {
@@ -90,5 +89,14 @@ module.exports = {
 
         const usuario = await Usuario.findOne({where:{email:email}}).then(userData => {return userData}).catch(err => {return console.error(err)});
         return usuario;
+    },
+
+    async updateLevel(celular) {
+
+        const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+        const usuarioNivel = usuario.dataValue.nivel;
+        const novoNivel = usuarioNivel + 1;
+        const update = await Usuario.update({nivel: novoNivel},{where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+        return update;
     }
 }

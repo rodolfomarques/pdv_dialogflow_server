@@ -19,8 +19,11 @@ module.exports = {
             data: data,
             local: local,
             id_usuario: usuario.id
-        }).then((doacao)=> {
-
+        }).then(async (doacao)=> {
+            // const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
+            // const usuarioNivel = usuario.dataValue.nivel;
+            // const novoNivel = usuarioNivel + 1;
+            // const update = await Usuario.update({nivel: novoNivel},{where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
             return res.json({fulfillmentText: `Sua doação feita no ${doacao.local}, foi registrada no dia ${doacao.data}`});
         }).catch(err => { return res.json({fulfillmentText: `Aconteceu um erro com sua doação: ${err}`})});
     },
@@ -35,31 +38,87 @@ module.exports = {
             attributes: ['nome', 'sexo', 'email', 'tipo_sanguineo']
         }).then((resultado) => {
                         
-            const listaDoacoes = resultado[0].dataValues.doacoes
-            var listaResultado = ['Lista das suas doações registradas \n'];
-            var numero = 1;
+            const listaDoacoes = resultado[0].dataValues.doacoes;
 
-            listaDoacoes.forEach(element => {
+            if(listaDoacoes.length == 0) {
+
+                const userLevel = Medalhas.getLevel(listaDoacoes.length);
+                var listaResultado = [`Você não possui doações registradas. A sua insignia de doador é ${userLevel}`];
+
+            } else {
+
+                const userLevel = Medalhas.getLevel(listaDoacoes.length);
+                var listaResultado = [`A sua insignia de doador é ${userLevel} \n\nLista das suas doações registradas \n`];
+                var numero = 1;
+    
+                listaDoacoes.forEach(element => {
+                    
+                    var dataDoacao = new Date(element.dataValues.data);
+                    var diaDoacao = dataDoacao.getUTCDate();
+                    var mesDoacao = dataDoacao.getMonth() + 1;
+                    var anoDoacao = dataDoacao.getFullYear()
+    
+                    var medalha = Medalhas.getMedal(diaDoacao, mesDoacao)
+    
+                    item  = `\n\nDoação número ${numero} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${diaDoacao}/${mesDoacao}/${anoDoacao} \nMedalha:` + medalha;
+                    listaResultado.push(item);
+                    numero++
+    
+                });
+    
                 
-                var dataDoacao = new Date(element.dataValues.data);
-                var diaDoacao = dataDoacao.getUTCDate();
-                var mesDoacao = dataDoacao.getMonth() + 1;
-                var anoDoacao = dataDoacao.getFullYear()
+            }
 
-                var medalha = Medalhas.getMedal(diaDoacao, mesDoacao)
+            lista = listaResultado.join('')
+            return res.json({fulfillmentText: `${lista}`});
 
-                item  = `\n\nDoação número ${numero} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${diaDoacao}/${mesDoacao}/${anoDoacao} \nMedalha:` + medalha;
-                listaResultado.push(item);
-                numero++
-
-            });
-
-            lista = listaResultado.toString()
-            return res.json({fulfillmentText: lista} );
          }).catch((err) => {
             console.error(err); 
             return res.json({fulfillmentText: `Aconteceu um erro: ${err}`})
         });
+    },
+
+    async selectByid(id){
+        const doacoes = await Usuario.findAll({where:{id:id}, include:{
+            model: Doacao,
+            as: 'doacoes',
+            throught:{attributes: []}
+            },
+            attributes: []
+        }).then(response => {
+
+            var numDoacoes = response[0].doacoes.length;
+            var userLevel = Medalhas.getLevel(numDoacoes);
+            var donationData = [];
+            var userDonatonData = {userLevel, donationData};
+
+            response[0].doacoes.forEach(
+                (element) => {
+
+                    var dataDoacao = new Date(element.dataValues.data);
+                    var diaDoacao = dataDoacao.getUTCDate();
+                    var mesDoacao = dataDoacao.getMonth() + 1;
+                    var anoDoacao = dataDoacao.getFullYear()
+
+                    var medalha = Medalhas.getMedal(diaDoacao, mesDoacao)
+
+                    dados =  {
+                        id: element.id,
+                        dia: diaDoacao,
+                        mes: mesDoacao,
+                        ano: anoDoacao,
+                        local: element.local,
+                        medalha: medalha
+                    }
+                    donationData.push(dados)
+
+                })
+            
+                return userDonatonData;
+            
+        
+        }).catch(err => {console.error(err)});
+        return doacoes;
     },
 
     async checkLastData(req, res) {

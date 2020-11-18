@@ -30,7 +30,7 @@ cron.schedule('0 25 13 * * *', async () => {
                 if(sexo == 'masculino' && user.dias_de_diferenca == 67 || sexo == 'feminino' && user.dias_de_diferenca == 97){
 
                     var nome = user.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-                    telegramController.sendMessenge(user.celular, `Oi ${nome}!! Faz uma semana que você já pode doar novamente. Que tal fazer uma nova doação essa semana? Estamos precisando da sua ajuda!`)
+                    telegramController.sendMessenge(user.celular, `Oi ${nome}!! Faz uma semana que você já pode doar novamente. Que tal fazer uma nova doação essa semana?`)
 
                 }
 
@@ -54,7 +54,7 @@ cron.schedule('0 25 13 * * *', async () => {
 
 
 cron.schedule('* * * * * *', () => {
-    
+
 }, {
     scheduled: true,
     timezone: "America/Sao_Paulo"

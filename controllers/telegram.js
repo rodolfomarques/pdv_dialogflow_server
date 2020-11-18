@@ -1,9 +1,10 @@
 const { TelegramClient } = require('messaging-api-telegram');
 const Doacao = require('../models/Doacao');
 const Usuario = require('../models/Usuario');
+require('dotenv').config();
 
 const messenger = new TelegramClient({
-    accessToken: '1430926803:AAFO3mg-eDgKllf2R3enbKCJ_qICwqTdJFw'
+    accessToken: process.env.TELEGRAMTOKEN
 })
 
 // Lidando com os erros retornados
@@ -15,6 +16,7 @@ messenger.getWebhookInfo().catch((error) => {
     console.log(error.request); // HTTP request
     console.log(error.response); // HTTP response
 });
+
 
 module.exports = {
 

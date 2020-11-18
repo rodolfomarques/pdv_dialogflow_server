@@ -10,9 +10,9 @@ module.exports = {
         const {local, celular} = req.body.queryResult.parameters;
         const data = Date.now();
         const usuario = await Usuario.findOne({where:{celular:celular}});
-        
+
         if(!usuario){
-            return res.json({fulfillmentText: `Usuário não localizado, não foi possível registrar a doação`});
+            return res.json({fulfillmentText: `Usuário não localizado, não foi possível registrar a doação.`});
         }
 
         await Doacao.create({
@@ -37,44 +37,44 @@ module.exports = {
             },
             attributes: ['nome', 'sexo', 'email', 'tipo_sanguineo']
         }).then((resultado) => {
-                        
+
             const listaDoacoes = resultado[0].dataValues.doacoes;
 
             if(listaDoacoes.length == 0) {
 
                 const userLevel = Medalhas.getLevel(listaDoacoes.length);
-                var listaResultado = [`Você não possui doações registradas. A sua insignia de doador é ${userLevel}`];
+                var listaResultado = [`Você não possui doações registradas. A sua insígnia de doador é ${userLevel}`];
 
             } else {
 
                 const userLevel = Medalhas.getLevel(listaDoacoes.length);
-                var listaResultado = [`A sua insignia de doador é ${userLevel} \n\nLista das suas doações registradas \n`];
+                var listaResultado = [`A sua insígnia de doador é ${userLevel} \n\nSuas doações registradas: \n`];
                 var numero = 1;
-    
+
                 listaDoacoes.forEach(element => {
-                    
+
                     var dataDoacao = new Date(element.dataValues.data);
                     var diaDoacao = dataDoacao.getUTCDate();
                     var mesDoacao = dataDoacao.getMonth() + 1;
                     var anoDoacao = dataDoacao.getFullYear()
-    
+
                     var medalha = Medalhas.getMedal(diaDoacao, mesDoacao)
-    
-                    item  = `\n\nDoação número ${numero} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${diaDoacao}/${mesDoacao}/${anoDoacao} \nMedalha:` + medalha;
+
+                    item  = `\n\nDoação número: ${numero} \nLocal da doação: ${element.dataValues.local} \nDia da doação: ${diaDoacao}/${mesDoacao}/${anoDoacao} \nMedalha:` + medalha;
                     listaResultado.push(item);
                     numero++
-    
+
                 });
-    
-                
+
+
             }
 
             lista = listaResultado.join('')
             return res.json({fulfillmentText: `${lista}`});
 
          }).catch((err) => {
-            console.error(err); 
-            return res.json({fulfillmentText: `Aconteceu um erro: ${err}`})
+            console.error(err);
+            return res.json({fulfillmentText: `Eita, aconteceu um probleminha aqui. Desculpe.`})
         });
     },
 
@@ -113,10 +113,10 @@ module.exports = {
                     donationData.push(dados)
 
                 })
-            
+
                 return userDonatonData;
-            
-        
+
+
         }).catch(err => {console.error(err)});
         return doacoes;
     },
@@ -131,8 +131,8 @@ module.exports = {
             },
             attributes: []
         }).then(resultado => {
-            
-           
+
+
             const listaDoacoes = resultado[0].dataValues.doacoes;
             const numUltimaDoacao = resultado[0].dataValues.doacoes.length - 1;
             const ultimaDoacao = listaDoacoes[numUltimaDoacao];
@@ -140,7 +140,7 @@ module.exports = {
             return ultimaDoacao.dataValues;
 
         }).catch(err => {
-            return res.json({fulfillmentText: `esse aqui foi o erro: ${err}`});
+            return res.json({fulfillmentText: `Infelizmente, não consegui.`});
         })
 
         return lastData
@@ -151,7 +151,7 @@ module.exports = {
         const {celular} = req.body.queryResult.parameters;
 
          // - Verificação da data da última doação, se ela existir, e seu retorno
-            
+
         const ultimaData = await Usuario.findAll({where: {celular:celular}, include: {
             model: Doacao,
             as: 'doacoes',
@@ -159,7 +159,7 @@ module.exports = {
             },
             attributes: []
         }).then(resultado => {
-            
+
             const listaDoacoes = resultado[0].dataValues.doacoes;
 
             if (listaDoacoes.length == 0) {
@@ -176,8 +176,8 @@ module.exports = {
             }
 
         }).catch(err =>{ console.error(err)});
-        
-        // - Calculo da diferença entre o dia da última doação e o dia de hoje  
+
+        // - Calculo da diferença entre o dia da última doação e o dia de hoje
 
         const hoje = Date.now();
         const dataAnterior = new Date(ultimaData);
@@ -199,25 +199,25 @@ module.exports = {
         } else if(sexo == 'feminino' && diasDeDiferenca >= 90) {
 
             return true;
-       
+
         } else {
 
             return false;
 
-        } 
-  
-    }, 
+        }
+
+    },
 
     async timeForNextDonation(req, res) {
 
         const {celular} = req.body.queryResult.parameters;
-        
+
         if (celular == '') {
 
             throw Responses.plataform.no_number;
         }
          // - Verificação da data da última doação, se ela existir, e seu retorno
-            
+
         const ultimaData = await Usuario.findAll({where: {celular:celular}, include: {
             model: Doacao,
             as: 'doacoes',
@@ -229,7 +229,7 @@ module.exports = {
             if(resultado[0] === undefined || resultado[0] === null) {
 
                 throw 'user_not_found';
-                
+
             }
 
             const listaDoacoes = resultado[0].dataValues.doacoes;
@@ -248,14 +248,14 @@ module.exports = {
 
             }
 
-        }).catch(err =>{ 
-            
+        }).catch(err =>{
+
             console.error(err)
             return err
 
         });
 
-        // - Calculo da diferença entre o dia da última doação e o dia de hoje  
+        // - Calculo da diferença entre o dia da última doação e o dia de hoje
 
         if (ultimaData == 'user_not_found'){ throw Responses.user.user_not_found }
 
@@ -282,7 +282,7 @@ module.exports = {
 
             var time = 90 - diasDeDiferenca;
             return time;
-       
-        } 
+
+        }
     }
 }

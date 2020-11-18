@@ -28,10 +28,10 @@ module.exports = {
             moderador: true
         }).then(equipe_usuario => {
             console.log('relação de moderaçao criada')
-            return res.json({fulfillmentText: `O grupo ${equipe.nome} foi criado, pelo moderador ${usuario.nome}`})
+            return res.json({fulfillmentText: `O grupo ${equipe.nome} foi criado pelo moderador ${usuario.nome}`})
         }).catch(err => {
             console.log(err);
-            return res.json({fulfillmentText: "não foi possível criar o grupo"});
+            return res.json({fulfillmentText: "Não foi possível criar o grupo."});
         })
 
         return novaRelacao;

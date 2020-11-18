@@ -5,6 +5,7 @@ const routes = require('./routes')
 const basicAuth = require('express-basic-auth');
 require('dotenv').config();
 require('./config/db-connection');
+require('./controllers/telegram')
 
 //Variáveis para o envio de mensagens do servidor para o bot
 

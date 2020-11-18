@@ -6,7 +6,7 @@ module.exports = {
 
         const {celular} = req.body.queryResult.parameters;
         const novoUsuario = await Usuario.findAll({where:{celular: celular}}).then((response) => {
-       
+
             if(response == [] || response == false) {
                 return true;
             } else {
@@ -37,12 +37,12 @@ module.exports = {
             estado: estado
         }).then(
             (novoUsuario) => {
-                return res.json({fulfillmentText: `O usuário ${novoUsuario.nome}, no estado ${novoUsuario.estado}, do sexo ${novoUsuario.sexo}, nascido em ${novoUsuario.data_nascimento}, e com o email ${novoUsuario.email} foi criado. O seu número registrado é ${novoUsuario.celular}, via ${novoUsuario.plataforma}`})
+                return res.json({fulfillmentText: `O usuário ${novoUsuario.nome}, no estado ${novoUsuario.estado}, do sexo ${novoUsuario.sexo}, com nascimento em ${novoUsuario.data_nascimento}, e com o e-mail ${novoUsuario.email} foi criado. O seu número registrado é ${novoUsuario.celular}, via ${novoUsuario.plataforma}`})
             }
         ).catch(
             err => {
                 console.error(err)
-                res.json({fulfillmentText: `Aconteceu um erro no seu cadastro ${err}`})
+                res.json({fulfillmentText: `Lamento. Aconteceu um erro no seu cadastro.`})
             })
     },
 
@@ -72,9 +72,9 @@ module.exports = {
 
         } else {
 
-            throw 'Não foi possível atualizar'
+            throw 'Não foi possível atualizar.'
         }
-        
+
     },
 
     async userData(req, res) {
@@ -82,7 +82,7 @@ module.exports = {
         const {celular} = req.body.queryResult.parameters;
         const usuario = await Usuario.findOne({where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
         return usuario;
-        
+
     },
 
     async userDataByEmail(email){

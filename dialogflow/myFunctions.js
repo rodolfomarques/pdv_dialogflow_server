@@ -17,14 +17,15 @@ module.exports = {
 
         show (req, res) {
 
-            return res.json({fulfillmentText: 'Estas são as coisas que eu posso fazer: \n\n'+
-            `Fazer cadastro: cadastro um usuário novo.\n`+
-            `Registrar doação: registra uma nova doação sua.\n`+
-            `Histórico de doação: Lista as suas doações registradas.\n`+
-            `Criar uma equipe: cria um grupo de doadores.\n`+
-            `Inserir um participante: coloca um amigo no seu grupo.\n`+
-            `Quem faz parte da minha equipe?: Mostra quem esta no seu grupo de doadores.\n`+
-            `tempo restante: Mostra quanto tempo falta para a próxima doação.`            
+            return res.json({fulfillmentText: 'Essas são as coisas que eu posso fazer: \n\n'+
+            `[1] Cadastrar usuário: Cadastro um usuário novo.\n`+
+            `[2] Registrar doação: Registro a sua nova doação.\n`+
+            `[3] Exibir perfil: Apresento informações do seu perfil.\n`+
+            `[4] Histórico de doação: Listo os seus registros de doação.\n`+
+            `[5] Criar uma equipe: Crio um grupo de doadores.\n`+
+            `[6] Inserir um participante: Adiciono um amigo no seu grupo.\n`+
+            `[7] Minha equipe: Mostro quem está no seu grupo de doadores.\n`+
+            `[8] Tempo restante: Informo o tempo que falta para a próxima doação.`
             });
         }
     },
@@ -35,38 +36,38 @@ module.exports = {
         async select(req, res) {
 
             const newUser = await UsuarioControle.checkNewUser(req, res).then((respond) => {
-                
+
                 if(respond) {
-                    return res.json({fulfillmentText:`Olá! Eu sou o chatbot do Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações sobre doação de sangue?\nDigite: ajuda, para saber o que eu consigo fazer.`});
+                    return res.json({fulfillmentText:`Olá! Eu me chamo Socorro, sou a robô do projeto Pontos de Vida! Vejo que você é novo por aqui! Gostaria de se cadastrar na plataforma ou apenas obter informações sobre doação de sangue?\nDigite: ajuda, para saber o que eu consigo fazer.`});
                 } else {
                     return false
                 }
             })
-    
+
             if(!newUser) {
-    
+
                 let userData = await UsuarioControle.userData(req, res).then((response) => {
-                    
+
                     return res.json(
                         {
-                            fulfillmentText:`Ola, ${response.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}! Seja bem Vindo de Volta! O que você gostaria de fazer?\nDigite: ajuda, caso queira as opções.`,
-                            fulfillmentMessages:[
-                                {
-                                    card: {
-                                        title: `Seja bem vindo de volta ${response.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}!`,
-                                        subtitle: "É sempre bom ver você novamente! Como eu posso te ajudar?",
-                                        imageUri: "https://trello-attachments.s3.amazonaws.com/5c729b2ea75a2e7c59446799/5d8a52b2b50fe1541bc42542/938ceeb3bb4db63a5214967f69d72e58/_Inspira%C3%A7%C3%A3o_05.png"
-                                    }
-                                }
-                            ],
-                            payload: {
-                                telegram: `seja bem vindo de volta`
-                            }
+                            fulfillmentText:`Ola, ${response.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}! Seja bem-vindo de volta! O que você gostaria de fazer?\nDigite: ajuda, caso queira as opções.`,
+                           // fulfillmentMessages:[
+                           //      {
+                           //          card: {
+                           //              title: `Seja bem-vindo de volta ${response.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}!`,
+                           //              subtitle: "É sempre bom conversar com você. Como eu posso te ajudar?",
+                           //              imageUri: "https://trello-attachments.s3.amazonaws.com/5c729b2ea75a2e7c59446799/5d8a52b2b50fe1541bc42542/938ceeb3bb4db63a5214967f69d72e58/_Inspira%C3%A7%C3%A3o_05.png"
+                           //          }
+                           //      }
+                           //  ],
+                           //  payload: {
+                           //      telegram: `seja bem vindo de volta`
+                           //  }
                     });
-                
-                })            
+
+                })
             }
-    
+
         }
     },
 
@@ -78,7 +79,7 @@ module.exports = {
 
             const novoUsuario = await UsuarioControle.create(req, res);
             return novoUsuario;
-    
+
         },
 
         async updateUser(req, res){
@@ -86,7 +87,7 @@ module.exports = {
             await UsuarioControle.userUpdate(req, res).then(
                 response => {
                     var userName = response.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-                    res.json({fulfillmentText: `Seu cadastro foi alterado para: ${userName}, nascido em ${response.data_nascimento}, sexo ${response.sexo}, tipo sanguineo ${response.tipo_sanguineo} e email: ${response.email}`})
+                    res.json({fulfillmentText: `Seu cadastro foi alterado para: ${userName}, nascimento em ${response.data_nascimento}, sexo ${response.sexo}, tipo sanguíneo ${response.tipo_sanguineo} e e-mail: ${response.email}`})
             }).catch(err => {res.json({fulfillmentText: err})})
         }
 
@@ -102,17 +103,17 @@ module.exports = {
             const usuario = dados.dataValues;
 
             const proximaDoacao = await DoacaoControle.timeForNextDonation(req, res).then(time => {return time}).catch(err => console.error(err));
-            
+
             const dadosDoacao = await DoacaoControle.selectByid(usuario.id).then(response => {return response}).catch(err => {console.error(err)});
             let listaMedalha = [];
             dadosDoacao.donationData.forEach(emoji => {
-                listaMedalha.push(emoji.medalha);    
+                listaMedalha.push(emoji.medalha);
             })
             let medalhas = listaMedalha.join('');
             let userLevel = dadosDoacao.userLevel;
-            
+
             var userName = usuario.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-            
+
             var dataNascimento = new Date(usuario.data_nascimento);
             var diaNascimento = dataNascimento.getUTCDate();
             var mesNascimento = dataNascimento.getMonth() + 1;
@@ -128,10 +129,10 @@ module.exports = {
                 `Tipo Sanguineo: ${usuario.tipo_sanguineo} \n`+
                 `Nivel: ${userLevel} \n`+
                 `Medalhas: ${medalhas} \n`+
-                `Tempo para a próxima doação: ${proximaDoacao} dias.`            
+                `Tempo para a próxima doação: ${proximaDoacao} dias.`
             });
 
-            
+
 
         }
     },
@@ -141,63 +142,63 @@ module.exports = {
     doacao: {
 
         async create(req, res){
-                
+
             // - Verificação se o usuário atingiu o mínimo de tempo de doação
 
-            const podeDoar = await DoacaoControle.canDonate(req, res).then(resposta => { 
-                
+            const podeDoar = await DoacaoControle.canDonate(req, res).then(resposta => {
+
                 // - Registro da doação
                 if(resposta) {
-                
+
                     return DoacaoControle.create(req, res).then(response => {return response});
-    
+
                 } else {
-    
+
                     return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \nVerifique quanto tempo falta digitando: próxima doação`});
                 }
-            
+
             }).catch(err => console.error(err));
 
             return podeDoar;
-           
+
         },
 
         async historic(req, res) {
-            
+
             const historico = await DoacaoControle.select(req, res);
             return historico;
         },
 
         async lastData(req, res) {
-            
+
             await DoacaoControle.checkLastData(req, res).then(resposta => {
-                
+
                 var localDoacao = resposta.local.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-                return res.json({fulfillmentText: `A sua ultima doação foi feita no ${localDoacao}, no dia ${resposta.data}.`});
+                return res.json({fulfillmentText: `A sua última doação foi feita no ${localDoacao}, no dia ${resposta.data}.`});
             }).catch(err => {
                 return res.json({fulfillmentText: Response.donation.last_donation_error});
             });
-        }, 
+        },
 
         async remainingTime(req, res) {
 
             const tempoRestante = await DoacaoControle.timeForNextDonation(req, res).then(response => {
-                
+
                 if (response <= 0) {
 
-                    return res.json({fulfillmentText: `Você já pode voltar a doar! Fale com seus amigos e saiba se eles podem também. \nQuem sabe se você não pega uma carona com eles :-D`})
-                    
+                    return res.json({fulfillmentText: `Você já pode voltar a doar! Fale com seus amigos e saiba se eles podem também. \nQuem sabe se você não pega uma carona com eles? :-D`})
+
                 } else {
-                    
-                    return res.json({fulfillmentText: `faltam ${response} dias para você pode doar novamente.`});
+
+                    return res.json({fulfillmentText: `Faltam ${response} dias para você poder doar novamente.`});
                 }
-                
+
                }).catch(err => {
-                   
+
                 return res.json({fulfillmentText: Response.donation.remaining_time_error});
 
                });
-            
+
             return tempoRestante;
 
         }
@@ -239,17 +240,17 @@ module.exports = {
 
             const isModerator = await EquipeUsuarioControler.isModerator(celular, nome_equipe).then(response => {return response}).catch(err => {
                 return false;
-            })            
+            })
 
             if(isModerator){
 
                 // - encontrar o id do membro
-                
+
                 const usuario = await UsuarioControle.userDataByEmail(email).then(userData => {return userData}).catch(err => {
                     return res.json({fulfillmentText: Response.team.friend_not_found})})
-                
+
                 // - encontrar o id do grupo
-                
+
                 const equipe = await EquipeControle.teamDataByName(nome_equipe).then(teamData => {return teamData}).catch(err => {
                     res.json({fulfillmentText: Response.team.team_not_found});
                 })
@@ -267,21 +268,21 @@ module.exports = {
                 } else {
 
                     // - chamar a função que associa os dois
-        
+
                     const associacao = await EquipeUsuarioControler.associate(usuario.id, equipe.id).then(response => {
-                        
+
                         // - retorna para o usuário o resultado
                         return true;
-                        
+
                     }).catch(err => {
                         console.log(`erro no my functions ${err}`);
                         res.json({fulfillmentText: Response.team.cant_associate});
                     });
-                    
+
                     var userName = usuario.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
                     var equipeName = equipe.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
 
-                    if(associacao) {return res.json({fulfillmentText: `O Usuário ${userName}, foi inserido na equipe ${equipeName}`});}
+                    if(associacao) {return res.json({fulfillmentText: `O usuário ${userName}, foi inserido na equipe ${equipeName}`});}
                 }
 
 
@@ -317,7 +318,7 @@ module.exports = {
 
             } else {
 
-                res.json({fulfillmentText: `Não foi possível remover o usuário do grupo. Se você o moderador deste grupo, você so poderar sair dela ao deletar o grupo.`});
+                res.json({fulfillmentText: `Não foi possível remover o usuário do grupo. Se você for o moderador deste grupo, você só poderá sair deletando o grupo.`});
 
             }
         },
@@ -333,13 +334,13 @@ module.exports = {
             if(usuario === null) {
                 return res.json({fulfillmentText: Response.user.user_not_found});
             }
-            
+
             // - Verificar na tabela junção em quais registros tem aquele id de usuário e armazerar os id de cada grupo associado
 
             var idLista = [];
             const associacoes = await EquipeUsuarioControler.findAssociations(usuario.id).then(response => {return response}).catch(err => {
                console.error(err);
-               res.json({fulfillmentText: `Houve um erro na recuperação as associações na funcão myTeams`});
+               res.json({fulfillmentText: `Eita, alguma coisa deu errado aqui... Não consegui encontrar seus grupos.`});
             });
 
             if (associacoes === null || associacoes == []){
@@ -358,11 +359,11 @@ module.exports = {
             for(i = 0; i < idLista.length; i++){
 
                 const grupo = await EquipeControle.selectTeamById(idLista[i]).then(response => {return response}).catch(err => {console.error(err)});
-                                
+
                 var integrantes = []
-                
+
                 for(pessoa = 0; pessoa < grupo.dataValues.participantes.length; pessoa++){
-                    
+
                     let medalhas = await DoacaoControle.selectByid(grupo.dataValues.participantes[pessoa].dataValues.id).then(response => {
 
                         let emojis = [response.userLevel];
@@ -374,12 +375,12 @@ module.exports = {
                         return emojis
 
                     })
-                    
+
                     let [level, ...doacoesEmojis] = medalhas;
                     var userName = grupo.dataValues.participantes[pessoa].dataValues.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
                     integrantes.push(`${level} - ${userName} ${doacoesEmojis}`);
                 }
-                
+
                 var resultado = {
                     nome: `${grupo.dataValues.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}`,
                     descricao: `${grupo.dataValues.descricao.toString()}`,
@@ -388,30 +389,30 @@ module.exports = {
 
                 gruposDados.push(resultado);
 
-            }   
+            }
 
             // organização das informações para serem retornadas
-            
-            var teste = []
-        
+
+            var resultadosGrupos = []
+
            gruposDados.forEach(grupo => {
-                
-                teste.push(`\nNome do grupo: ${grupo.nome}\n`)
-                teste.push(`Descrição: ${grupo.descricao}\n`)
-                teste.push(`Integrantes:\n`)
+
+                resultadosGrupos.push(`\nNome do grupo: ${grupo.nome}\n`)
+                resultadosGrupos.push(`Descrição: ${grupo.descricao}\n`)
+                resultadosGrupos.push(`Integrantes:\n`)
 
                 grupo.integrantes.forEach(pessoa => {
-                    teste.push(`${pessoa}\n`)
+                    resultadosGrupos.push(`${pessoa}\n`)
                 })
 
             })
-            
+
             // - retorna essa lista de grupos para o usuário para o bot
 
-            return res.json({fulfillmentText: 
-                'Estes são seus grupo e integrantes \n'+
-                teste.join('')
-                
+            return res.json({fulfillmentText:
+                'Esses são seus grupos e integrantes: \n'+
+                resultadosGrupos.join('')
+
             })
         },
 
@@ -421,7 +422,7 @@ module.exports = {
 
             const teamData = await EquipeControle.teamDataByName(nome_equipe).then(response => {
                 return response}).catch(err => {console.error(err); return false});
-            
+
             if(teamData){
                 const isModerator = await EquipeUsuarioControler.isModerator(celular, nome_equipe).then(response => {return response}).catch(err => {
                     console.error(err);
@@ -433,7 +434,7 @@ module.exports = {
                     var id = teamData.dataValues.id;
 
                     EquipeControle.teamUpdate(id, nome_equipe_novo, descricao_equipe).then(() => {
-                        return res.json({fulfillmentText: `Os dados do grupo foram atualizados`})
+                        return res.json({fulfillmentText: `Os dados do grupo foram atualizados.`})
                     }).catch(err => {res.json({fulfillmentText: `${err}`})})
 
                 } else {
@@ -446,7 +447,7 @@ module.exports = {
                 res.json({fulfillmentText: Response.team.team_not_found});
 
             }
- 
+
         }
     },
 

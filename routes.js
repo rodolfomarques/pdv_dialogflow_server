@@ -1,11 +1,37 @@
 const express = require('express');
 const DialogflowControle = require('./controllers/dialogflow');
-const TelegramControler = require('./controllers/telegram');
+const passport = require('passport');
 const route = express.Router();
+const messageSystem = require('./controllers/messageSystem');
+
+function checkAuthentication(req, res, next) {
+    if(req.isAuthenticated()) {return next()} else {res.redirect('/login?fail=true')}
+}
 
 route.get('/', (req, res) => {
-    res.send('Silence is gold');
-})
+    res.render('index.ejs');
+});
+
+route.get('/login', (req, res) => {
+    if(req.query.fail) {
+        res.render('login.ejs', {message: "login e senha não encontrados"});
+    } else {
+        res.render('login.ejs', {message: false});
+    }
+});
+
+route.post('/login', passport.authenticate('local', { 
+    successRedirect: '/painel',
+    failureRedirect: '/login?fail=true' 
+}));
+
+route.get('/painel', checkAuthentication ,(req, res) => {
+    res.render('painel.ejs',{plataforma: ['telegram', 'whatsapp'], estado: ['pb', 'ce'], tipo_sanguineo: ['ab+', 'o+']});
+});
+
+route.post('/mass_message', checkAuthentication, (req, res) => {
+    
+} )
 
 route.post('/dialogflow', (req, res, next) => {
 

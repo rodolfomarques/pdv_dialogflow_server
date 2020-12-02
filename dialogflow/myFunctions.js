@@ -8,6 +8,8 @@ const DoacaoControle = require('../controllers/doacoes');
 const EquipeControle = require('../controllers/equipe');
 const EquipeUsuarioControler = require('../controllers/equipeUsuario');
 const Response = require('../controllers/errors_responses');
+const Telegram = require('../controllers/telegram');
+const { TelegramClient } = require('messaging-api-telegram');
 
 module.exports = {
 
@@ -102,7 +104,15 @@ module.exports = {
             const dados = await UsuarioControle.userData(req, res).then(response => {return response}).catch(err => console.error(err));
             const usuario = dados.dataValues;
 
-            const proximaDoacao = await DoacaoControle.timeForNextDonation(req, res).then(time => {return time}).catch(err => console.error(err));
+            const proximaDoacao = await DoacaoControle.timeForNextDonation(req, res).then(time => {
+                
+                if(time <= 0) {
+                    return 0
+                } else {
+                    return time
+                }
+            
+            }).catch(err => console.error(err));
 
             const dadosDoacao = await DoacaoControle.selectByid(usuario.id).then(response => {return response}).catch(err => {console.error(err)});
             let listaMedalha = [];
@@ -244,6 +254,9 @@ module.exports = {
 
             if(isModerator){
 
+                // dados do moderador
+
+                const moderador = await UsuarioControle.userData(req, res).then(response => {return response.dataValues}).catch(err => console.error(err));
                 // - encontrar o id do membro
 
                 const usuario = await UsuarioControle.userDataByEmail(email).then(userData => {return userData}).catch(err => {
@@ -270,19 +283,26 @@ module.exports = {
                     // - chamar a função que associa os dois
 
                     const associacao = await EquipeUsuarioControler.associate(usuario.id, equipe.id).then(response => {
-
                         // - retorna para o usuário o resultado
                         return true;
-
+                        
                     }).catch(err => {
                         console.log(`erro no my functions ${err}`);
                         res.json({fulfillmentText: Response.team.cant_associate});
                     });
+                    
+                    
+                    var userName = usuario.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+                    var equipeName = equipe.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+                    var numDoTelegram = usuario.celular;
+                    var moderadorNome = moderador.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+                    console.log(numDoTelegram)
+                    if(associacao) {
+                        
+                        // - função que envia mensagem para o usuário quando ele for associado a um grupo
+                        Telegram.sendMessenge(numDoTelegram, `${moderadorNome} inseriu você no grupo ${equipeName}`);
 
-                    var userName = usuario.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-                    var equipeName = equipe.nome.toString().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-
-                    if(associacao) {return res.json({fulfillmentText: `O usuário ${userName}, foi inserido na equipe ${equipeName}`});}
+                        return res.json({fulfillmentText: `O usuário ${userName}, foi inserido na equipe ${equipeName}`});}
                 }
 
 

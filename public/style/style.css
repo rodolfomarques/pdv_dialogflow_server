@@ -1,0 +1,63 @@
+body {
+    background-color: #1F1E1E;
+    color: #ffffff
+}
+
+header {
+    padding: 25px 0px;
+}
+
+h1 {
+
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center; 
+}
+
+p {
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    text-align: center;
+    
+}
+
+img {
+
+    width: 10%;
+}
+
+.grid {
+
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 3fr) 1fr;
+    justify-items: center;
+    
+}
+
+.center-column {
+    grid-column: 2/3;
+}
+
+form {
+    
+    height: 200px;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input {
+    padding: 5px;
+}
+
+.form-button {
+
+    width: 100px;
+    padding: 10px;
+
+}

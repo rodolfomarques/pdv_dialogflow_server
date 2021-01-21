@@ -9,9 +9,11 @@ module.exports = {
 
         const {local, celular} = req.body.queryResult.parameters;
         const data = Date.now();
-        const usuario = await Usuario.findOne({where:{celular:celular}});
+
+        const usuario = await Usuario.findOne({where:{celular:celular}}).then(userdata => {return userdata});
 
         if(!usuario){
+
             return res.json({fulfillmentText: `Usuário não localizado, não foi possível registrar a doação.`});
         }
 
@@ -190,8 +192,15 @@ module.exports = {
 
         const usuario = await Usuario.findOne({where:{celular:celular}});
 
+        console.log(usuario)
+        
+        if(usuario === null){
+            
+            return null;   
+        }
+        
         var sexo = usuario.sexo.toString().toLowerCase()
-
+        
         if (sexo == 'masculino' && diasDeDiferenca >= 60) {
 
             return true;

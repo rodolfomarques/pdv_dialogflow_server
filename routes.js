@@ -3,13 +3,18 @@ const DialogflowControle = require('./controllers/dialogflow');
 const passport = require('passport');
 const route = express.Router();
 const messageSystem = require('./controllers/messageSystem');
+const analytics = require('./controllers/analytics')
 
 function checkAuthentication(req, res, next) {
     if(req.isAuthenticated()) {return next()} else {res.redirect('/login?fail=true')}
 }
 
-route.get('/', (req, res) => {
-    res.render('index.ejs');
+route.get('/', async (req, res) => {
+    const usuarios = await analytics.usuariosTotais();
+    const doacoes = await analytics.doacoesTotais();
+    const equipes = await analytics.equipesTotais();
+    const recorrentes = await analytics.doadoresRescorrentes();
+    res.render('index.ejs', {doacoes: doacoes, usuarios: usuarios, equipes: equipes, doadoresRecorrentes: recorrentes});
 });
 
 route.get('/login', (req, res) => {
@@ -25,12 +30,17 @@ route.post('/login', passport.authenticate('local', {
     failureRedirect: '/login?fail=true' 
 }));
 
-route.get('/painel', checkAuthentication ,(req, res) => {
-    res.render('painel.ejs',{plataforma: ['telegram', 'whatsapp'], estado: ['pb', 'ce'], tipo_sanguineo: ['ab+', 'o+']});
+route.get('/painel', checkAuthentication, async (req, res) => {
+    // const plataformas = await messageSystem.findPlataform()
+    const estados = await messageSystem.findState()
+    const tipos_sanguineos = await messageSystem.findBloodType()
+    res.render('painel.ejs',{plataforma: ['telegram'] , estado: estados, tipo_sanguineo: tipos_sanguineos});
 });
 
-route.post('/mass_message', checkAuthentication, (req, res) => {
+route.post('/mass_message', checkAuthentication, async (req, res) => {
     
+    await messageSystem.sendMessage(req, res);
+
 } )
 
 route.post('/dialogflow', (req, res, next) => {

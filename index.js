@@ -27,7 +27,8 @@ app.use(session({
   saveUninitialized: false,
   cookie: {maxAge:30 * 60 * 1000}
 }));
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use("/public", express.static('./public/'));
 app.use(cookieParser);
 app.use(passport.initialize());
 app.use(passport.session());

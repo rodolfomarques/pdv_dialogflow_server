@@ -27,7 +27,8 @@ module.exports = {
             `[5] Criar uma equipe: Crio um grupo de doadores.\n`+
             `[6] Inserir um participante: Adiciono um amigo no seu grupo.\n`+
             `[7] Minha equipe: Mostro quem está no seu grupo de doadores.\n`+
-            `[8] Tempo restante: Informo o tempo que falta para a próxima doação.`
+            `[8] Tempo restante: Informo o tempo que falta para a próxima doação. \n`+
+            `[9] Alterar meus dados cadastrados: Eu vou pedir novamente todos os seus dados e alterar meu registro`
             });
         }
     },
@@ -157,12 +158,18 @@ module.exports = {
 
             const podeDoar = await DoacaoControle.canDonate(req, res).then(resposta => {
 
+                    console.log(resposta)
                 // - Registro da doação
-                if(resposta) {
+
+                if (resposta === null) {
+                
+                    return res.json({fulfillmentText: `Não encontrei o registro deste usuário... Tem certeza que você está cadastrado? Faça seu cadastro, se não estiver, ou verifique a informação sobre o seu sexo digitando Exibir Perfil. É preciso que esteja aparecendo masculino ou feminino.`});
+                
+                } else if(resposta) {
 
                     return DoacaoControle.create(req, res).then(response => {return response});
 
-                } else {
+                } else if (resposta == false) {
 
                     return res.json({fulfillmentText: `Não foi possível registrar sua doação. Seu prazo de descanso, antes de uma nova doação, ainda não foi cumprido. \nVerifique quanto tempo falta digitando: próxima doação`});
                 }

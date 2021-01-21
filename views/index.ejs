@@ -1,24 +1,1203 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site do Chatbot Pontos de Vida">
-    <meta name="author" content="Paulo Henrique Serrano, Rodolfo Marques, Interfaces Livres"> 
-    <link rel="stylesheet" href="./style/style.css">
-    <title>Chatbot Pontos de Vida</title>
-</head>
-<body>
-    <header class="grid">
-        <img class="center-column" src="./img/logo.png" alt="Logo Pontos de Vida">
-    </header>
-    <main class="grid">
-        <h1 class="center-column">Bem Vindo ao Pontos de vida</h1>
-        <p class="center-column"> Esta é a página do Chatbot Pontos de Vida. Esta é uma ferramenta realizada pelo Projeto Interfaces livres, que busca engajar pessoas no ato de doar sangue.</p>
-        <p class="center-column"> Para mais informações sobre o projeto, entre no nosso instagram @interfaceslivres</p>
-    </main>
-    <footer>
+<html lang="pt-BR">
 
-    </footer>
+<head>
+	<meta charset="UTF-8">
+	<title>Chatbot Pontos de Vida</title>
+	<meta name='robots' content='noindex,nofollow' />
+	<link rel='dns-prefetch' href='//s.w.org' />
+	<link rel="alternate" type="application/rss+xml" title="Feed para Teste 09 &raquo;"
+		href="http://150.165.178.251/net3202009/index.php/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Teste 09 &raquo;"
+		href="http://150.165.178.251/net3202009/index.php/comments/feed/" />
+	<script>
+		window._wpemojiSettings = {
+			"baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/",
+			"ext": ".png",
+			"svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/",
+			"svgExt": ".svg",
+			"source": {
+				"concatemoji": "http:\/\/150.165.178.251\/net3202009\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.6"
+			}
+		};
+		! function (e, a, t) {
+			var r, n, o, i, p = a.createElement("canvas"),
+				s = p.getContext && p.getContext("2d");
+
+			function c(e, t) {
+				var a = String.fromCharCode;
+				s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, e), 0, 0);
+				var r = p.toDataURL();
+				return s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, t), 0, 0), r === p.toDataURL()
+			}
+
+			function l(e) {
+				if (!s || !s.fillText) return !1;
+				switch (s.textBaseline = "top", s.font = "600 32px Arial", e) {
+					case "flag":
+						return !c([127987, 65039, 8205, 9895, 65039], [127987, 65039, 8203, 9895, 65039]) && (!c([55356,
+							56826, 55356, 56819
+						], [55356, 56826, 8203, 55356, 56819]) && !c([55356, 57332, 56128, 56423, 56128, 56418, 56128,
+							56421, 56128, 56430, 56128, 56423, 56128, 56447
+						], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128,
+							56430, 8203, 56128, 56423, 8203, 56128, 56447
+						]));
+					case "emoji":
+						return !c([55357, 56424, 8205, 55356, 57212], [55357, 56424, 8203, 55356, 57212])
+				}
+				return !1
+			}
+
+			function d(e) {
+				var t = a.createElement("script");
+				t.src = e, t.defer = t.type = "text/javascript", a.getElementsByTagName("head")[0].appendChild(t)
+			}
+			for (i = Array("flag", "emoji"), t.supports = {
+					everything: !0,
+					everythingExceptFlag: !0
+				}, o = 0; o < i.length; o++) t.supports[i[o]] = l(i[o]), t.supports.everything = t.supports.everything && t
+				.supports[i[o]], "flag" !== i[o] && (t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && t
+					.supports[i[o]]);
+			t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && !t.supports.flag, t.DOMReady = !1, t
+				.readyCallback = function () {
+					t.DOMReady = !0
+				}, t.supports.everything || (n = function () {
+						t.readyCallback()
+					}, a.addEventListener ? (a.addEventListener("DOMContentLoaded", n, !1), e.addEventListener("load", n, !
+					1)) : (e.attachEvent("onload", n), a.attachEvent("onreadystatechange", function () {
+						"complete" === a.readyState && t.readyCallback()
+					})), (r = t.source || {}).concatemoji ? d(r.concatemoji) : r.wpemoji && r.twemoji && (d(r.twemoji), d(r
+						.wpemoji)))
+		}(window, document, window._wpemojiSettings);
+	</script>
+	<style>
+		img.wp-smiley,
+		img.emoji {
+			display: inline !important;
+			border: none !important;
+			box-shadow: none !important;
+			height: 1em !important;
+			width: 1em !important;
+			margin: 0 .07em !important;
+			vertical-align: -0.1em !important;
+			background: none !important;
+			padding: 0 !important;
+		}
+	</style>
+	<link rel='stylesheet' href='public/css/style.min.css'>
+	<link rel='stylesheet' href='public/css/export-wp-page-to-static-html-public.css'>
+	<link rel='stylesheet' href='public/css/style.css'>
+	<style id='twentytwenty-style-inline-css'>
+		.color-accent,
+		.color-accent-hover:hover,
+		.color-accent-hover:focus,
+		:root .has-accent-color,
+		.has-drop-cap:not(:focus):first-letter,
+		.wp-block-button.is-style-outline,
+		a {
+			color: #cd2653;
+		}
+
+		blockquote,
+		.border-color-accent,
+		.border-color-accent-hover:hover,
+		.border-color-accent-hover:focus {
+			border-color: #cd2653;
+		}
+
+		button,
+		.button,
+		.faux-button,
+		.wp-block-button__link,
+		.wp-block-file .wp-block-file__button,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"],
+		.bg-accent,
+		.bg-accent-hover:hover,
+		.bg-accent-hover:focus,
+		:root .has-accent-background-color,
+		.comment-reply-link {
+			background-color: #cd2653;
+		}
+
+		.fill-children-accent,
+		.fill-children-accent * {
+			fill: #cd2653;
+		}
+
+		body,
+		.entry-title a,
+		:root .has-primary-color {
+			color: #000000;
+		}
+
+		:root .has-primary-background-color {
+			background-color: #000000;
+		}
+
+		cite,
+		figcaption,
+		.wp-caption-text,
+		.post-meta,
+		.entry-content .wp-block-archives li,
+		.entry-content .wp-block-categories li,
+		.entry-content .wp-block-latest-posts li,
+		.wp-block-latest-comments__comment-date,
+		.wp-block-latest-posts__post-date,
+		.wp-block-embed figcaption,
+		.wp-block-image figcaption,
+		.wp-block-pullquote cite,
+		.comment-metadata,
+		.comment-respond .comment-notes,
+		.comment-respond .logged-in-as,
+		.pagination .dots,
+		.entry-content hr:not(.has-background),
+		hr.styled-separator,
+		:root .has-secondary-color {
+			color: #6d6d6d;
+		}
+
+		:root .has-secondary-background-color {
+			background-color: #6d6d6d;
+		}
+
+		pre,
+		fieldset,
+		input,
+		textarea,
+		table,
+		table *,
+		hr {
+			border-color: #dcd7ca;
+		}
+
+		caption,
+		code,
+		code,
+		kbd,
+		samp,
+		.wp-block-table.is-style-stripes tbody tr:nth-child(odd),
+		:root .has-subtle-background-background-color {
+			background-color: #dcd7ca;
+		}
+
+		.wp-block-table.is-style-stripes {
+			border-bottom-color: #dcd7ca;
+		}
+
+		.wp-block-latest-posts.is-grid li {
+			border-top-color: #dcd7ca;
+		}
+
+		:root .has-subtle-background-color {
+			color: #dcd7ca;
+		}
+
+		body:not(.overlay-header) .primary-menu>li>a,
+		body:not(.overlay-header) .primary-menu>li>.icon,
+		.modal-menu a,
+		.footer-menu a,
+		.footer-widgets a,
+		#site-footer .wp-block-button.is-style-outline,
+		.wp-block-pullquote:before,
+		.singular:not(.overlay-header) .entry-header a,
+		.archive-header a,
+		.header-footer-group .color-accent,
+		.header-footer-group .color-accent-hover:hover {
+			color: #cd2653;
+		}
+
+		.social-icons a,
+		#site-footer button:not(.toggle),
+		#site-footer .button,
+		#site-footer .faux-button,
+		#site-footer .wp-block-button__link,
+		#site-footer .wp-block-file__button,
+		#site-footer input[type="button"],
+		#site-footer input[type="reset"],
+		#site-footer input[type="submit"] {
+			background-color: #cd2653;
+		}
+
+		.header-footer-group,
+		body:not(.overlay-header) #site-header .toggle,
+		.menu-modal .toggle {
+			color: #000000;
+		}
+
+		body:not(.overlay-header) .primary-menu ul {
+			background-color: #000000;
+		}
+
+		body:not(.overlay-header) .primary-menu>li>ul:after {
+			border-bottom-color: #000000;
+		}
+
+		body:not(.overlay-header) .primary-menu ul ul:after {
+			border-left-color: #000000;
+		}
+
+		.site-description,
+		body:not(.overlay-header) .toggle-inner .toggle-text,
+		.widget .post-date,
+		.widget .rss-date,
+		.widget_archive li,
+		.widget_categories li,
+		.widget cite,
+		.widget_pages li,
+		.widget_meta li,
+		.widget_nav_menu li,
+		.powered-by-wordpress,
+		.to-the-top,
+		.singular .entry-header .post-meta,
+		.singular:not(.overlay-header) .entry-header .post-meta a {
+			color: #6d6d6d;
+		}
+
+		.header-footer-group pre,
+		.header-footer-group fieldset,
+		.header-footer-group input,
+		.header-footer-group textarea,
+		.header-footer-group table,
+		.header-footer-group table *,
+		.footer-nav-widgets-wrapper,
+		#site-footer,
+		.menu-modal nav *,
+		.footer-widgets-outer-wrapper,
+		.footer-top {
+			border-color: #dcd7ca;
+		}
+
+		.header-footer-group table caption,
+		body:not(.overlay-header) .header-inner .toggle-wrapper::before {
+			background-color: #dcd7ca;
+		}
+	</style>
+	<link rel='stylesheet' href='public/css/print.css'>
+	<link rel='stylesheet' href='public/css/elementor-icons.min.css'>
+	<link rel='stylesheet' href='public/css/animations.min.css'>
+	<link rel='stylesheet' href='public/css/frontend-legacy.min.css'>
+	<link rel='stylesheet' href='public/css/frontend.min.css'>
+	<link rel='stylesheet' href='public/css/post-7.css'>
+	<link rel='stylesheet' href='public/css/global.css'>
+	<link rel='stylesheet' href='public/css/post-77.css'>
+	<link rel='stylesheet' href='public/css/6071.css'>
+	<link rel='stylesheet' href='public/css/fontawesome.min.css'>
+	<link rel='stylesheet' href='public/css/brands.min.css'>
+	<link rel='stylesheet' href='public/css/regular.min.css'>
+	<link rel='stylesheet' href='public/css/solid.min.css'>
+	<script>
+		/* <![CDATA[ */
+		var rcewpp = {
+			"ajax_url": "http://150.165.178.251/net3202009/wp-admin/admin-ajax.php",
+			"nonce": "6e89356908",
+			"home_url": "http://150.165.178.251/net3202009"
+		};
+		/* ]]\> */
+	</script>
+	<script src='public/js/jquery.min.js' id='jquery-core-js'></script>
+	<script src='public/js/jquery-migrate.min.js' id='jquery-migrate-js'></script>
+	<script src='public/js/export-wp-page-to-static-html-public.js' id='export-wp-page-to-static-html-js'></script>
+	<script src='public/js/index.js' id='twentytwenty-js-js' async></script>
+	<link rel="https://api.w.org/" href="http://150.165.178.251/net3202009/index.php/wp-json/" />
+	<link rel="alternate" type="application/json"
+		href="http://150.165.178.251/net3202009/index.php/wp-json/wp/v2/pages/77" />
+	<link rel="EditURI" type="application/rsd+xml" title="RSD"
+		href="http://150.165.178.251/net3202009/xmlrpc.php?rsd" />
+	<link rel="wlwmanifest" type="application/wlwmanifest+xml"
+		href="http://150.165.178.251/net3202009/wp-includes/wlwmanifest.xml" />
+	<meta name="generator" content="WordPress 5.6" />
+	<link rel="canonical" href="http://150.165.178.251/net3202009/index.php/site-pontos-de-vida/" />
+	<link rel='shortlink' href='http://150.165.178.251/net3202009/?p=77' />
+	<link rel="alternate" type="application/json+oembed"
+		href="http://150.165.178.251/net3202009/index.php/wp-json/oembed/1.0/embed?url=http%3A%2F%2F150.165.178.251%2Fnet3202009%2Findex.php%2Fsite-pontos-de-vida%2F" />
+	<link rel="alternate" type="text/xml+oembed"
+		href="http://150.165.178.251/net3202009/index.php/wp-json/oembed/1.0/embed?url=http%3A%2F%2F150.165.178.251%2Fnet3202009%2Findex.php%2Fsite-pontos-de-vida%2F&#038;format=xml" />
+	<script>
+		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+	</script>
+	<style>
+		.recentcomments a {
+			display: inline !important;
+			padding: 0 !important;
+			margin: 0 !important;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+</head>
+
+<body
+	class="page-template page-template-elementor_canvas page page-id-77 wp-embed-responsive singular enable-search-modal missing-post-thumbnail has-no-pagination not-showing-comments show-avatars elementor_canvas footer-top-visible elementor-default elementor-template-canvas elementor-kit-7 elementor-page elementor-page-77">
+	<a class="skip-link screen-reader-text" href="#site-content">Pular para o conteúdo</a>
+	<div data-elementor-type="wp-post" data-elementor-id="77" class="elementor elementor-77"
+		data-elementor-settings="[]">
+		<div class="elementor-inner">
+			<div class="elementor-section-wrap">
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-31817006 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default"
+					data-id="31817006" data-element_type="section"
+					data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+					<div class="elementor-background-overlay"></div>
+					<div class="elementor-container elementor-column-gap-default">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-593f5f4b"
+								data-id="593f5f4b" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<section
+											class="elementor-section elementor-inner-section elementor-element elementor-element-1e2cd5e elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+											data-id="1e2cd5e" data-element_type="section">
+											<div class="elementor-container elementor-column-gap-no">
+												<div class="elementor-row">
+													<nav class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-3c834fe elementor-invisible"
+														data-id="3c834fe" data-element_type="column"
+														data-settings="{&quot;animation&quot;:&quot;slideInDown&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-a3b11c9 elementor-widget__width-auto elementor-invisible elementor-widget elementor-widget-button"
+																	data-id="a3b11c9" data-element_type="widget"
+																	data-settings="{&quot;_animation&quot;:&quot;none&quot;}"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="#recursos"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-text">Recursos</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-a1ad1e6 elementor-widget__width-auto elementor-invisible elementor-widget elementor-widget-button"
+																	data-id="a1ad1e6" data-element_type="widget"
+																	data-settings="{&quot;_animation&quot;:&quot;none&quot;}"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="#dados"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-text">Dados</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-f5b3713 elementor-widget__width-auto elementor-widget elementor-widget-button"
+																	data-id="f5b3713" data-element_type="widget"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="#depoimento"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-text">Depoimento</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-f78ce0e elementor-widget__width-auto elementor-widget elementor-widget-button"
+																	data-id="f78ce0e" data-element_type="widget"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="https://t.me/PontosDeVida_bot"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-icon elementor-align-icon-left">
+																						<i aria-hidden="true"
+																							class="fab fa-telegram"></i>
+																					</span>
+																					<span
+																						class="elementor-button-text">Telegram</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</nav>
+												</div>
+											</div>
+										</section>
+										<div class="elementor-element elementor-element-73be9145 elementor-widget elementor-widget-image"
+											data-id="73be9145" data-element_type="widget"
+											data-widget_type="image.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-image">
+													<img src="public/images/inicial-pdv-p00fsazyczi4tcq9bx1lyn9kj9v9dlp47fqivww8fq.png"
+														title="inicial-pdv" alt="inicial-pdv" /> </div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-3039b305 elementor-widget elementor-widget-heading"
+											data-id="3039b305" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h2 class="elementor-heading-title elementor-size-large">Conheça
+													Socorro, uma robô para te motivar <br>na doação voluntária de sangue
+												</h2>
+											</div>
+										</div>
+										<section
+											class="elementor-section elementor-inner-section elementor-element elementor-element-4b5a2413 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+											data-id="4b5a2413" data-element_type="section">
+											<div class="elementor-container elementor-column-gap-wider">
+												<div class="elementor-row">
+													<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6107ba9d"
+														data-id="6107ba9d" data-element_type="column">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-6be6711f elementor-align-right elementor-mobile-align-justify elementor-widget elementor-widget-button"
+																	data-id="6be6711f" data-element_type="widget"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="#"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-text">vídeo
+																						explicativo</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2166a91b"
+														data-id="2166a91b" data-element_type="column">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-5572a1da elementor-mobile-align-justify elementor-widget elementor-widget-button"
+																	data-id="5572a1da" data-element_type="widget"
+																	data-widget_type="button.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-button-wrapper">
+																			<a href="https://t.me/PontosDeVida_bot"
+																				class="elementor-button-link elementor-button elementor-size-sm"
+																				role="button">
+																				<span
+																					class="elementor-button-content-wrapper">
+																					<span
+																						class="elementor-button-icon elementor-align-icon-left">
+																						<i aria-hidden="true"
+																							class="fab fa-telegram-plane"></i>
+																					</span>
+																					<span
+																						class="elementor-button-text">fale
+																						no telegram</span>
+																				</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-aac2acd elementor-section-height-min-height elementor-section-boxed elementor-section-height-default elementor-section-items-middle"
+					data-id="aac2acd" data-element_type="section"
+					data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+					<div class="elementor-background-overlay"></div>
+					<div class="elementor-container elementor-column-gap-default">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5f1c7f81"
+								data-id="5f1c7f81" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-4ea2d79 elementor-widget elementor-widget-menu-anchor"
+											data-id="4ea2d79" data-element_type="widget"
+											data-widget_type="menu-anchor.default">
+											<div class="elementor-widget-container">
+												<div id="recursos" class="elementor-menu-anchor"></div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-170c4964 elementor-widget elementor-widget-heading"
+											data-id="170c4964" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h3 class="elementor-heading-title elementor-size-large">Recursos da
+													Socorro</h3>
+											</div>
+										</div>
+										<section
+											class="elementor-section elementor-inner-section elementor-element elementor-element-4abc47f8 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+											data-id="4abc47f8" data-element_type="section">
+											<div class="elementor-container elementor-column-gap-wider">
+												<div class="elementor-row">
+													<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-26e89112"
+														data-id="26e89112" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-662c47a7 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="662c47a7" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="far fa-id-card"></i> </div>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-38c4ded8 elementor-widget elementor-widget-heading"
+																	data-id="38c4ded8" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			Cadastrar usuários</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-fea946e elementor-widget elementor-widget-text-editor"
+																	data-id="fea946e" data-element_type="widget"
+																	data-widget_type="text-editor.default">
+																	<div class="elementor-widget-container">
+																		<div
+																			class="elementor-text-editor elementor-clearfix">
+																			<p>O sistema de cadastro permite a
+																				identificação do usuário, para enviar
+																				mensagens direcionadas e controlar
+																				outras funções.</p>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-291d29c6 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="291d29c6" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="far fa-calendar-alt"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-154e16a elementor-widget elementor-widget-heading"
+																	data-id="154e16a" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			Lembrar a data de retorno</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-15072859 elementor-widget elementor-widget-text-editor"
+																	data-id="15072859" data-element_type="widget"
+																	data-widget_type="text-editor.default">
+																	<div class="elementor-widget-container">
+																		<div
+																			class="elementor-text-editor elementor-clearfix">
+																			<p>Após registrar a sua doação, Socorro vai
+																				contar o tempo e te avisar sobre a
+																				possibilidade de retorno meses depois. 
+																			</p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-53a4eee1"
+														data-id="53a4eee1" data-element_type="column">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-044f1d5 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="044f1d5" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-pencil-alt"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-caa9404 elementor-widget elementor-widget-heading"
+																	data-id="caa9404" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			Registrar doações</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-0ccdd2c elementor-widget elementor-widget-text-editor"
+																	data-id="0ccdd2c" data-element_type="widget"
+																	data-widget_type="text-editor.default">
+																	<div class="elementor-widget-container">
+																		<div
+																			class="elementor-text-editor elementor-clearfix">
+																			<p>Ao doar sangue e registrar a doação,
+																				Socorro vai criar um histórico e premiar
+																				com medalhas os doadores mais dedicados.
+																			</p>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-8d3f2f2 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="8d3f2f2" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-user-friends"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-4670332 elementor-widget elementor-widget-heading"
+																	data-id="4670332" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			Criar grupos de doação</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-9caae4c elementor-widget elementor-widget-text-editor"
+																	data-id="9caae4c" data-element_type="widget"
+																	data-widget_type="text-editor.default">
+																	<div class="elementor-widget-container">
+																		<div
+																			class="elementor-text-editor elementor-clearfix">
+																			<p>Forme equipes e chame os amigos para
+																				doar. Socorro te ajuda a reunir a turma
+																				pra realizar um gesto tão nobre.</p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-4b708e51 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+					data-id="4b708e51" data-element_type="section"
+					data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+					<div class="elementor-container elementor-column-gap-default">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5d673596"
+								data-id="5d673596" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-ddbbbb9 elementor-widget elementor-widget-menu-anchor"
+											data-id="ddbbbb9" data-element_type="widget"
+											data-widget_type="menu-anchor.default">
+											<div class="elementor-widget-container">
+												<div id="dados" class="elementor-menu-anchor"></div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-18af903e elementor-widget elementor-widget-heading"
+											data-id="18af903e" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h3 class="elementor-heading-title elementor-size-large">Dados de Uso
+												</h3>
+											</div>
+										</div>
+										<section
+											class="elementor-section elementor-inner-section elementor-element elementor-element-67f2ec91 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+											data-id="67f2ec91" data-element_type="section">
+											<div class="elementor-container elementor-column-gap-default">
+												<div class="elementor-row">
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-22404b5c"
+														data-id="22404b5c" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-635ab91 elementor-widget elementor-widget-heading"
+																	data-id="635ab91" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3	class="elementor-heading-title elementor-size-large"><%=doacoes%> Doações</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-3b8da8b elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="3b8da8b" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-hand-holding-heart"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-47edb544"
+														data-id="47edb544" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-417ab309 elementor-widget elementor-widget-heading"
+																	data-id="417ab309" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3	class="elementor-heading-title elementor-size-large"><%=usuarios%> USUÁRIOS CADASTRADOS</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-e1ac139 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="e1ac139" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-id-badge"></i> </div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-6875d1f3"
+														data-id="6875d1f3" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-39f43f0c elementor-widget elementor-widget-heading"
+																	data-id="39f43f0c" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3	class="elementor-heading-title elementor-size-large"><%= equipes %> EQUIPES</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-9df9ebb elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="9df9ebb" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-users"></i> </div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+										<section
+											class="elementor-section elementor-inner-section elementor-element elementor-element-ae994e2 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+											data-id="ae994e2" data-element_type="section">
+											<div class="elementor-container elementor-column-gap-default">
+												<div class="elementor-row">
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-34b54be"
+														data-id="34b54be" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-dce3b0f elementor-widget elementor-widget-heading"
+																	data-id="dce3b0f" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3 class="elementor-heading-title elementor-size-large"><%= doadoresRecorrentes%> pessoas registraram mais de uma doação
+																		</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-8731ced elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="8731ced" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-heart"></i> </div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-7e22722"
+														data-id="7e22722" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-dace56c elementor-widget elementor-widget-heading"
+																	data-id="dace56c" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			dezembro é o mês com mais doaÇÕES</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-3280f72 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="3280f72" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-calendar-day"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-bc58023"
+														data-id="bc58023" data-element_type="column"
+														data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+														<div class="elementor-column-wrap elementor-element-populated">
+															<div class="elementor-widget-wrap">
+																<div class="elementor-element elementor-element-a75c35c elementor-widget elementor-widget-heading"
+																	data-id="a75c35c" data-element_type="widget"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h3
+																			class="elementor-heading-title elementor-size-large">
+																			A PB É O ESTADO COM MAIS DOAÇÕES registradas
+																		</h3>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-3a977e4 elementor-view-default elementor-widget elementor-widget-icon"
+																	data-id="3a977e4" data-element_type="widget"
+																	data-widget_type="icon.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-icon-wrapper">
+																			<div class="elementor-icon">
+																				<i aria-hidden="true"
+																					class="fas fa-map-marked-alt"></i>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-72da8d13 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+					data-id="72da8d13" data-element_type="section"
+					data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+					<div class="elementor-background-overlay"></div>
+					<div class="elementor-container elementor-column-gap-default">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-23d4a994"
+								data-id="23d4a994" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-d2811a1 elementor-widget elementor-widget-menu-anchor"
+											data-id="d2811a1" data-element_type="widget"
+											data-widget_type="menu-anchor.default">
+											<div class="elementor-widget-container">
+												<div id="depoimento" class="elementor-menu-anchor"></div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-1fb95103 elementor-view-default elementor-widget elementor-widget-icon"
+											data-id="1fb95103" data-element_type="widget"
+											data-widget_type="icon.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-icon-wrapper">
+													<div class="elementor-icon">
+														<i aria-hidden="true" class="far fa-comment"></i> </div>
+												</div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-452abc5 elementor-widget elementor-widget-text-editor"
+											data-id="452abc5" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-text-editor elementor-clearfix">
+													<p>&#8220;Doar sangue é importante, mas as vezes a gente acaba se
+														esquecendo disso, com a Socorro do Pontos de Vida, consigo
+														manter a assiduidade das doações e assim salvar mais
+														vidas.&#8221; (Fernanda Honorato, estudante)</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-5f29dbd4 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+					data-id="5f29dbd4" data-element_type="section">
+					<div class="elementor-container elementor-column-gap-default">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-620e1bd9"
+								data-id="620e1bd9" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-24f7e0c1 elementor-widget elementor-widget-heading"
+											data-id="24f7e0c1" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h2 class="elementor-heading-title elementor-size-large">Dê um alô!</h2>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-848f5b6 elementor-widget elementor-widget-text-editor"
+											data-id="848f5b6" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-text-editor elementor-clearfix">
+													<p>Clique no botão abaixo para ser redirecionado para o chat com a
+														enfermeira Socorro. Faça seu cadastro, registre suas doações,
+														explore as demais funcionalidades e convide os amigos para
+														montar uma equipe.&nbsp;</p>
+													<p><span style="letter-spacing: -0.3px;">Os dados do seu cadastro
+															serão usados exclusivamente pelo Pontos de Vida para
+															realizar contatos sobre a doação de sangue. Consulte a nossa
+															<a href="#">política de privacidade</a> para mais
+															detalhes.</span></p>
+													<p>A sua doação regular e voluntária de sangue é muito importante
+														para diversos pacientes. Doar sangue é doar vida. Um gesto nobre
+														que impacta positivamente a vida de todos os envolvidos.</p>
+												</div>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-f79bca9 elementor-mobile-align-justify elementor-align-center elementor-widget elementor-widget-button"
+											data-id="f79bca9" data-element_type="widget"
+											data-widget_type="button.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-button-wrapper">
+													<a href="https://t.me/PontosDeVida_bot"
+														class="elementor-button-link elementor-button elementor-size-sm"
+														role="button">
+														<span class="elementor-button-content-wrapper">
+															<span
+																class="elementor-button-icon elementor-align-icon-left">
+																<i aria-hidden="true" class="fab fa-telegram-plane"></i>
+															</span>
+															<span class="elementor-button-text">fale no telegram</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section
+					class="elementor-section elementor-top-section elementor-element elementor-element-554be7b elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+					data-id="554be7b" data-element_type="section"
+					data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+					<div class="elementor-container elementor-column-gap-wider">
+						<div class="elementor-row">
+							<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-c3bb865"
+								data-id="c3bb865" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-748c423a elementor-widget elementor-widget-heading"
+											data-id="748c423a" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h3 class="elementor-heading-title elementor-size-large">Sobre nós</h3>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-642c8190 elementor-widget elementor-widget-text-editor"
+											data-id="642c8190" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-text-editor elementor-clearfix">
+													<p>O Pontos de Vida é uma ação do projeto de extensão Interfaces
+														Livres, da Universidade Federal da Paraíba.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-74cf92a8"
+								data-id="74cf92a8" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-c5066df elementor-widget elementor-widget-heading"
+											data-id="c5066df" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h3 class="elementor-heading-title elementor-size-large">Missão do
+													Pontos de Vida</h3>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-69660ca elementor-widget elementor-widget-text-editor"
+											data-id="69660ca" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-text-editor elementor-clearfix">
+													<p>Oferecer soluções para motivar a prática da doação regular e
+														voluntária de sangue.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-3716a7ed"
+								data-id="3716a7ed" data-element_type="column">
+								<div class="elementor-column-wrap elementor-element-populated">
+									<div class="elementor-widget-wrap">
+										<div class="elementor-element elementor-element-d7ae1b6 elementor-widget elementor-widget-heading"
+											data-id="d7ae1b6" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h3 class="elementor-heading-title elementor-size-large">Contato</h3>
+											</div>
+										</div>
+										<div class="elementor-element elementor-element-ea0a530 elementor-icon-list--layout-inline elementor-list-item-link-inline elementor-widget elementor-widget-icon-list"
+											data-id="ea0a530" data-element_type="widget"
+											data-widget_type="icon-list.default">
+											<div class="elementor-widget-container">
+												<ul class="elementor-icon-list-items elementor-inline-items">
+													<li class="elementor-icon-list-item elementor-inline-item">
+														<a href="https://www.instagram.com/pdv.pb/"> <span
+																class="elementor-icon-list-icon">
+																<i aria-hidden="true" class="fab fa-instagram"></i>
+															</span>
+															<span class="elementor-icon-list-text">pdv.pb</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<script src='public/js/wp-embed.min.js' id='wp-embed-js'></script>
+	<script src='public/js/frontend-modules.min.js' id='elementor-frontend-modules-js'></script>
+	<script src='public/js/core.min.js' id='jquery-ui-core-js'></script>
+	<script src='public/js/dialog.min.js' id='elementor-dialog-js'></script>
+	<script src='public/js/waypoints.min.js' id='elementor-waypoints-js'></script>
+	<script src='public/js/swiper.min.js' id='swiper-js'></script>
+	<script src='public/js/share-link.min.js' id='share-link-js'></script>
+	<script id='elementor-frontend-js-before'>
+		var elementorFrontendConfig = {
+			"environmentMode": {
+				"edit": false,
+				"wpPreview": false
+			},
+			"i18n": {
+				"shareOnFacebook": "Compartilhar no Facebook",
+				"shareOnTwitter": "Compartilhar no Twitter",
+				"pinIt": "Fixar",
+				"download": "Baixar",
+				"downloadImage": "Baixar imagem",
+				"fullscreen": "Tela cheia",
+				"zoom": "Zoom",
+				"share": "Compartilhar",
+				"playVideo": "Reproduzir v\u00eddeo",
+				"previous": "Anterior",
+				"next": "Pr\u00f3ximo",
+				"close": "Fechar"
+			},
+			"is_rtl": false,
+			"breakpoints": {
+				"xs": 0,
+				"sm": 480,
+				"md": 768,
+				"lg": 1025,
+				"xl": 1440,
+				"xxl": 1600
+			},
+			"version": "3.0.15",
+			"is_static": false,
+			"legacyMode": {
+				"elementWrappers": true
+			},
+			"urls": {
+				"assets": "http:\/\/150.165.178.251\/net3202009\/wp-content\/plugins\/elementor\/assets\/"
+			},
+			"settings": {
+				"page": [],
+				"editorPreferences": []
+			},
+			"kit": {
+				"global_image_lightbox": "yes",
+				"lightbox_enable_counter": "yes",
+				"lightbox_enable_fullscreen": "yes",
+				"lightbox_enable_zoom": "yes",
+				"lightbox_enable_share": "yes",
+				"lightbox_title_src": "title",
+				"lightbox_description_src": "description"
+			},
+			"post": {
+				"id": 77,
+				"title": "Site%20Pontos%20de%20Vida%20%E2%80%93%20Teste%2009",
+				"excerpt": "",
+				"featuredImage": false
+			}
+		};
+	</script>
+	<script src='public/js/frontend.min.js' id='elementor-frontend-js'></script>
+	<script>
+		/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
+			.addEventListener("hashchange", function () {
+				var t, e = location.hash.substring(1);
+				/^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i
+					.test(t.tagName) || (t.tabIndex = -1), t.focus())
+			}, !1);
+	</script>
 </body>
+
 </html>
+
+<!--This file was exported by "Export WP Page to Static HTML" plugin which created by ReCorp (https://myrecorp.com) -->

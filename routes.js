@@ -34,12 +34,15 @@ route.get('/painel', checkAuthentication, async (req, res) => {
     // const plataformas = await messageSystem.findPlataform()
     const estados = await messageSystem.findState()
     const tipos_sanguineos = await messageSystem.findBloodType()
-    res.render('painel.ejs',{plataforma: ['telegram'] , estado: estados, tipo_sanguineo: tipos_sanguineos});
+    res.render('painel.ejs',{plataforma: ['telegram'] , estado: estados, tipo_sanguineo: tipos_sanguineos, message: false});
 });
 
 route.post('/mass_message', checkAuthentication, async (req, res) => {
     
-    await messageSystem.sendMessage(req, res);
+    const message = await messageSystem.sendMessage(req, res);
+    const estados = await messageSystem.findState()
+    const tipos_sanguineos = await messageSystem.findBloodType()
+    res.render('painel.ejs',{plataforma: ['telegram'] , estado: estados, tipo_sanguineo: tipos_sanguineos, message: message});
 
 } )
 

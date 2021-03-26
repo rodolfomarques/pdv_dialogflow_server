@@ -2,6 +2,7 @@ const {TelegramClient} = require('messaging-api-telegram');
 const Sequelize = require('../config/db-connection');
 const { Op } = require("sequelize");
 const Usuario = require('../models/Usuario');
+const doacaoController = require('./doacoes');
 
 require('dotenv').config();
 
@@ -23,10 +24,11 @@ module.exports = {
 
     async sendMessage(req, res) {
 
-        plataforma = req.body.plataforma
-        estado = req.body.estado
-        tipo_sanguineo = req.body.tipo_sanguineo
-        mensagem = req.body.mensagem
+        plataforma = req.body.plataforma;
+        estado = req.body.estado;
+        tipo_sanguineo = req.body.tipo_sanguineo;
+        condicao_doado = req.body.condicao_doado;
+        mensagem = req.body.mensagem;
 
         if (plataforma === 'todos') {  
             plataforma = {
@@ -54,18 +56,64 @@ module.exports = {
             }
         }).then(response => {return response}).catch(err => console.error(err));
 
-        users.forEach(user => {
+        //Eu preciso verificar se o usuário já pode doar ou não, e usar este parâmetro como elemento de filtragem
+        // pegar os numeros de cada usuário e passar pela função canDonate() do controller doação
+        // eu ainda to carente para carai por causa de Julianna... ainda não consigo me desligar (ainda). Ta na hora de pegar outra pessoa o só sair para conversar?
 
-            const celular = user.dataValues.celular;
-            console.log(celular)
-            messenger.sendMessage(celular, mensagem, {
-                disableWebPagePreview: true,
-                disableNotification: false,
-            })
+        if(condicao_doado == 'todos') {
 
-        });
+            users.forEach(user => {
+                const celular = user.dataValues.celular;
+                messenger.sendMessage(celular, mensagem, {
+                    disableWebPagePreview: true,
+                    disableNotification: false,
+                })
+            });
 
-        return res.send('mensagens enviadas')
+            return 'mensagens enviadas'
+
+        } else if (condicao_doado == 'podeDoar') {
+
+            users.forEach(user => {
+    
+                const celular = user.dataValues.celular;
+                doacaoController.canDonateByPhone(celular).then(resposta => {
+                    if(resposta == true){
+                        messenger.sendMessage(celular, mensagem, {
+                            disableWebPagePreview: true,
+                            disableNotification: false,
+                        });
+
+                        console.log(`mensagem enviada para o número ${celular}`);
+                    }
+                }).catch(err => {return err});
+
+                return 'Mensagens enviadas para os usuários que já podem doar sangue'
+    
+            });
+
+        } else if (condicao_doado == 'naoPodeDoar') {
+
+            users.forEach(user => {
+    
+                const celular = user.dataValues.celular;
+                doacaoController.canDonateByPhone(celular).then(resposta => {
+                    if(resposta == false){
+                        messenger.sendMessage(celular, mensagem, {
+                            disableWebPagePreview: true,
+                            disableNotification: false,
+                        });
+
+                        console.log(`mensagem enviada para o número ${celular}`);
+                    }
+                }).catch(err => {return err});
+
+                return 'Mensagens enviadas para os usuários que ainda não podem doar sangue'
+    
+            });
+
+        }
+
     },
 
     findPlataform: async function () {
@@ -78,7 +126,10 @@ module.exports = {
         allPlataforms.forEach((item) => {
             plataforms.push(item.plataforma);
         })
-        return plataforms;
+
+        let plataforms_filtradas = plataforms.filter((e, i) => plataforms.indexOf(e) === i);
+
+        return plataforms_filtradas;
 
     },
 
@@ -94,7 +145,9 @@ module.exports = {
             estados.push(item.estado);
         })
 
-        return estados;
+        let estados_filtrados = estados.filter((e, i) => estados.indexOf(e) === i);
+
+        return estados_filtrados;
     },
 
     findBloodType: async function() {
@@ -109,7 +162,9 @@ module.exports = {
             tipos_sanguineos.push(item.tipo_sanguineo);
         })
 
-        return tipos_sanguineos;
+        let tipos_sanguineos_filtrados = tipos_sanguineos.filter((e, i) => tipos_sanguineos.indexOf(e) === i);
+
+        return tipos_sanguineos_filtrados;
     } 
 
 

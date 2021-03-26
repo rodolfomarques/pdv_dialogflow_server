@@ -12,14 +12,18 @@
     <header class="grid">
         <img class="center-column" src="public/img/logo.png" alt="Logo Pontos de Vida">
     </header>
-    <main class="grid">
+    <main class="grid login">
         <h1 class="center-column">Login do Sistema de Mensagens</h1>
         <div class="center-column">
             <form id="form" action="/login" method="post">
-                <label for="username">Login</label>
-                <input type="text" name="username" id="form_name">
-                <label for="password">Senha</label>
-                <input type="password" name="password" id="form_pass">
+                <section>
+                    <label for="username">Login</label>
+                    <input type="text" name="username" id="form_name">
+                </section>
+                <section>
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" id="form_pass">
+                </section>
                 <input class="form-button" type="submit" value="Enviar">    
             </form>
             <% if(message) {%> 

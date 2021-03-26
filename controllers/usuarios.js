@@ -98,5 +98,24 @@ module.exports = {
         const novoNivel = usuarioNivel + 1;
         const update = await Usuario.update({nivel: novoNivel},{where:{celular:celular}}).then(userData => {return userData}).catch(err => console.error(err));
         return update;
+    },
+
+    async delete(req, res) {
+
+        const {celular, email} = req.body.queryResult.parameters;
+        
+        const usuario = await Usuario.findOne({where:{celular: celular}}).then(userData => {return userData}).catch(err => console.error(err));
+
+        if (usuario.dataValues.email == email) {
+
+            const usuarioDeletado = await Usuario.destroy({where:{celular: celular}}).then(response => {return response}).catch(err => console.err(err));
+            usuarioDeletado == true ? res.json({fulfillmentText: `O seu cadastro foi deletado. Espero que a gente se encontre no futuro. Se cuide e continue fazendo suas doações`}) : res.json({fulfillmentText: `O seu cadastro não foi deletado. Aconteceu algum erro...`});
+
+        } else {
+
+            return res.json({fulfillmentText: `O email que você digitou não corresponde com o email cadastrado. Tente Novamente`})
+
+        }
+        
     }
 }

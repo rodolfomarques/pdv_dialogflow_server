@@ -16,30 +16,47 @@
         <h1 class="center-column">Sistema de Envio de Mensagens</h1>
         <div class="center-column">
             <form id="form" action="/mass_message" method="post">
-                <label for="plataforma">Selecione a Plataforma</label>
-                <select name="plataforma">
-                    <option value="todos">Todos</option>
-                    <% plataforma.forEach(element => { %>
-                        <option value="<%=element%>"><%=element%></option>
-                    <% }) %>
-                </select>
-                <label for="estado">Selecione o Estado</label>
-                <select name="estado" id="">
-                    <option value="todos">Todos</option>
-                    <% estado.forEach(element => { %>
-                        <option value="<%=element%>"><%=element%></option>
-                    <% }); %>
-                </select>
-                <label for="tipo_sanguineo">Selecione o tipo Tipo Sanguineo</label>
-                <select name="tipo_sanguineo" id="">
-                    <option value="todos">Todos</option>
-                    <% tipo_sanguineo.forEach(element => { %>
-                        <option value="<%=element%>"><%=element%></option>
-                    <% }) %>
-                </select>
-                <input type="text" name="mensagem" id="">
-                <input class="form-button" type="submit" value="Enviar">    
+                <section>
+                    <label for="plataforma">Selecione a Plataforma</label>
+                    <select name="plataforma">
+                        <option value="todos">Todos</option>
+                        <% plataforma.forEach(element => { %>
+                            <option value="<%=element%>"><%=element%></option>
+                        <% }) %>
+                    </select>
+                </section>
+                <section>
+                    <label for="estado">Selecione o Estado</label>
+                    <select name="estado" id="">
+                        <option value="todos">Todos</option>
+                        <% estado.forEach(element => { %>
+                            <option value="<%=element%>"><%=element%></option>
+                        <% }); %>
+                    </select>
+                </section>
+                <section>
+                    <label for="tipo_sanguineo">Selecione o tipo Tipo Sanguineo</label>
+                    <select name="tipo_sanguineo" id="">
+                        <option value="todos">Todos</option>
+                        <% tipo_sanguineo.forEach(element => { %>
+                            <option value="<%=element%>"><%=element%></option>
+                        <% }) %>
+                    </select>
+                </section>
+                <section>
+                    <label for="condicao_doador">Selecione a condição de doação</label>
+                    <select name="condicao_doado" id="">
+                        <option value="todos">Todos</option>
+                        <option value="podeDoar">Já Pode Doar</option>
+                        <option value="naoPodeDoar">Não Pode Doar Ainda</option>
+                    </select>
+                </section>
+                <textarea name="mensagem" id="" cols=40 rows="5"></textarea>
+                <input class="form-button" type="submit" value="Enviar">
             </form>
+            <% if(message) {%> 
+                <p><%= message %></p>
+            <% } %>   
         </div>
     </main>
     <footer>

@@ -19,6 +19,9 @@ module.exports = {
             case 'Cadastro_usuario_novos_dados':
                 dialogflowFunctions.cadastro_usuario.updateUser(req,res);
                 break
+            case 'deletar_usuario':
+                dialogflowFunctions.cadastro_usuario.deleteUser(req, res);
+                break
             case 'cadastro_equipe':
                 dialogflowFunctions.equipe.create(req, res);
                 break;

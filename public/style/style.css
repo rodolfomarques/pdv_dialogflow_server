@@ -39,9 +39,14 @@ img {
     grid-column: 2/3;
 }
 
+main.grid.login {
+
+    grid-template-rows: auto 300px;
+}
+
 form {
     
-    height: 200px;
+    height: auto;
     text-transform: uppercase;
     text-align: center;
     display: flex;
@@ -51,8 +56,30 @@ form {
     align-items: center;
 }
 
+
+section {
+
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+}
+
+section * {
+
+    margin-bottom: 5px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+
 input {
     padding: 5px;
+    margin: 10px;
 }
 
 .form-button {

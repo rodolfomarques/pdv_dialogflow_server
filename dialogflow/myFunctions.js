@@ -43,7 +43,7 @@ module.exports = {
                         `[4] Histórico de doação: Listo os seus registros de doação.\n` +
                         `[5] Criar uma equipe: Crio um grupo de doadores.\n` +
                         `[6] Inserir um participante: Adiciono um amigo no seu grupo.\n` +
-                        `[7] Minha equipe: Mostro quem está no seu grusdfsdfpo de doadores.\n` +
+                        `[7] Minha equipe: Mostro quem está no seu grupo de doadores.\n` +
                         `[8] Tempo restante: Informo o tempo que falta para a próxima doação. \n` +
                         `[9] Alterar meus dados cadastrados: Eu vou pedir novamente todos os seus dados e alterar meu registro.\n`+
                         `[10] Deletar cadastro: Deleta seu cadastro de usuário no meu banco de dados.\n`

@@ -12,10 +12,10 @@ module.exports = {
       },
       id_usuario: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {model: 'usuarios', key: 'id'},
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       },
       data: {
         type: Sequelize.DATEONLY,

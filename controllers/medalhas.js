@@ -9,10 +9,25 @@ module.exports = {
                 return `🎅`
             case `15/11`:
                 return `🎖️`
+            case `07/11`:
+                return `🦥`
+            case `12/06`:
+                return `💌`
+            case `31/10`:
+                return `🧛`            
+            case `05/11`:
+                return `🎥`            
+            case `11/08`:
+                return `📚`            
+            case `22/04`:
+                return `🌎`
+            case `20/04` || `22/04`:
+                return `🦷`
             default:
                 return `❤️` 
         }
     },
+
 
     getLevel(doacoes = new Number()){
         
